@@ -45,6 +45,8 @@ public class LoginController implements Initializable {
     private TextField UserName;
     @FXML
     private PasswordField Password;
+    POS_MainController POS_Main;
+    MainController Main;
 
     /**
      * Initializes the controller class.
@@ -67,8 +69,10 @@ public class LoginController implements Initializable {
                     if (rs.getString("usertype").equals("Casher")) {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/dcaa_pos_/POS_Main.fxml"));
                         Parent root1 = loader.load();
-                        POS_MainController POS_Main = loader.getController();
-                        POS_Main.UserID = Integer.parseInt(rs.getString("idusers"));
+                        POS_Main = loader.getController();
+                        //POS_Main.setUserID(rs.getString("idusers"));
+                        System.out.println(rs.getString("idusers") + "Login user ID");
+                        POS_Main.setUserID(rs.getString("idusers"));
 
                         Stage stage = new Stage();
                         stage.initModality(Modality.WINDOW_MODAL);
@@ -79,12 +83,13 @@ public class LoginController implements Initializable {
                     } else if (rs.getString("usertype").equals("Manager")) {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/dcaa_pos_/Main.fxml"));
                         Parent root1 = loader.load();
-                        MainController Main = loader.getController();
-                        Main.setUserId(Integer.parseInt(rs.getString("idusers")));
+                        Main = loader.getController();
+                        Main.setUserId(rs.getString("idusers"));
+                        System.out.println(Main.getUserId() + "login user id");
 
                         Stage stage = new Stage();
                         stage.initModality(Modality.WINDOW_MODAL);
-                        stage.initStyle(StageStyle.DECORATED);
+                        stage.initStyle(StageStyle.UNDECORATED);
                         stage.setTitle("Main Window");
                         stage.setScene(new Scene(root1));
                         stage.show();

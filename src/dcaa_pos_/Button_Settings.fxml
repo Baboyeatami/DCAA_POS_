@@ -44,10 +44,10 @@
       </TableView>
       <ButtonBar layoutX="19.0" layoutY="512.0" prefHeight="40.0" prefWidth="803.0">
         <buttons>
-          <Button mnemonicParsing="false" text="Button" />
-            <Button layoutX="738.0" layoutY="18.0" mnemonicParsing="false" text="Button" />
-            <Button layoutX="738.0" layoutY="18.0" mnemonicParsing="false" text="Button" />
-            <Button layoutX="738.0" layoutY="18.0" mnemonicParsing="false" text="Button" />
+            <Button fx:id="Close" layoutX="738.0" layoutY="18.0" mnemonicParsing="false" onAction="#Close" text="Close">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
         </buttons>
       </ButtonBar>
       <Label layoutX="22.0" layoutY="23.0" text="Search Item:">

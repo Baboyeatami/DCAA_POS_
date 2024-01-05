@@ -23,8 +23,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -46,6 +50,7 @@ public class Inventory_Controller implements Initializable {
     @FXML
     private Button Item_type_List;
     _Add_itemListController add_itemListController;
+    _Add_itemListController Update_itemListController;
     @FXML
     private TableView<Inventory_Data_Model> Table;
     @FXML
@@ -64,6 +69,16 @@ public class Inventory_Controller implements Initializable {
     private Button Item_type_List1;
     @FXML
     private Button Shortcut_settings;
+    @FXML
+    private MenuItem MenuItemUpdate;
+    @FXML
+    private Button refresh;
+    @FXML
+    private TableColumn<Inventory_Data_Model, String> Cost;
+    @FXML
+    private ComboBox<String> combo;
+    @FXML
+    private TextField Search;
 
     /**
      * Initializes the controller class.
@@ -75,7 +90,9 @@ public class Inventory_Controller implements Initializable {
         Description.setCellValueFactory(new PropertyValueFactory<>("Description"));
         price.setCellValueFactory(new PropertyValueFactory<>("Price"));
         Item_type.setCellValueFactory(new PropertyValueFactory<>("ItemType"));
+        Cost.setCellValueFactory(new PropertyValueFactory<>("Cost"));
         loaddata();
+        loadcombo_data();
     }
 
     @FXML
@@ -83,6 +100,19 @@ public class Inventory_Controller implements Initializable {
         Stage close = (Stage) btnClose.getScene().getWindow();
         close.close();
 
+    }
+
+    void loadcombo_data() {
+
+        ObservableList<String> data = FXCollections.observableArrayList();
+
+        data.add("Item Id");
+        data.add("Item Name");
+        data.add("Description");
+
+        combo.setItems(data);
+
+        //OptionsCombo.setValue("Select User Level");
     }
 
     @FXML
@@ -131,23 +161,40 @@ public class Inventory_Controller implements Initializable {
 
     }
 
+    @FXML
     void loaddata() {
         DBConnection.init();
 
         Connection c = DBConnection.getConnection();
 
-        PreparedStatement ps;
+        PreparedStatement ps, ps1 = null;
+        tableData.clear();
         try {
-            ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price, Item_type_idItem_type FROM dcaa_pos.items");
+            ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost, Item_type_idItem_type FROM dcaa_pos.items");
             ResultSet rs = ps.executeQuery();
+
+            String ItemType = "";
+
             while (rs.next()) {
-                tableData.add(new Inventory_Data_Model(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+                ps1 = c.prepareStatement("Select Item_type_Name,idItem_type from dcaa_pos.item_type where idItem_type ='" + rs.getString("Item_type_idItem_type") + "'");
+                ResultSet rs2 = ps1.executeQuery();
+                while (rs2.next()) {
+                    if (rs.getString("Item_type_idItem_type").equals(rs2.getString("idItem_type"))) {
+                        ItemType = rs2.getString("Item_type_Name");
+                        System.out.println("Item Name:" + rs2.getString("Item_type_Name"));
+                        break;
+                    }
+                }
+                System.out.println(rs.getString("Description"));
+                tableData.add(new Inventory_Data_Model(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), ItemType, rs.getString("Cost")));
                 System.out.println(rs.getString(1));
             }
 
             Table.setItems(tableData);
 
             c.close();
+            ps.close();
+            ps1.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
@@ -190,6 +237,104 @@ public class Inventory_Controller implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(Inventory_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    boolean Update = false;
+
+    @FXML
+
+    private void UPDATE_ITEM(ActionEvent event) {
+        Inventory_Data_Model model = Table.getSelectionModel().getSelectedItem();
+
+        System.out.println(model.ID);
+        //Button_Settings_DataModel Item = Item_list_table.getItems().get(row);
+        //TableColumn col = pos.getTableColumn();
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dcaa_pos_/_Add_itemList.fxml"));
+
+            Parent root1 = loader.load();
+            Update_itemListController = loader.getController();
+            Update_itemListController.setInventory_(this);
+            Update_itemListController.set_Update_data(model.ID, model.Item_name, model.Description, model.Price, model.ItemType, true);
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setTitle("Update Item");
+            stage.setScene(new Scene(root1));
+            stage.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(Inventory_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    void Load_search() {
+        DBConnection.init();
+
+        Connection c = DBConnection.getConnection();
+        String ItemName = "";
+        String Search = "%" + this.Search.getText() + "%";
+        PreparedStatement ps, ps1 = null;
+        ResultSet rs;
+        tableData.clear();
+        try {
+            switch (combo.getSelectionModel().getSelectedIndex()) {
+                case 0: {
+                    ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost, Item_type_idItem_type FROM dcaa_pos.items where idItems like '" + Search + "'");
+                    rs = ps.executeQuery();
+                    break;
+                }
+                case 1: {
+                    ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost, Item_type_idItem_type FROM dcaa_pos.items where Item_name like '" + Search + "'");
+                    rs = ps.executeQuery();
+                    break;
+                }
+                case 2: {
+                    ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost, Item_type_idItem_type FROM dcaa_pos.items where Description like '" + Search + "'");
+                    rs = ps.executeQuery();
+                    break;
+                }
+                default:
+                    ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost, Item_type_idItem_type FROM dcaa_pos.items");
+                    rs = ps.executeQuery();
+                    break;
+            }
+
+            String ItemType = "";
+
+            while (rs.next()) {
+                ps1 = c.prepareStatement("Select Item_type_Name,idItem_type from dcaa_pos.item_type where idItem_type ='" + rs.getString("Item_type_idItem_type") + "'");
+                ResultSet rs2 = ps1.executeQuery();
+                while (rs2.next()) {
+                    if (rs.getString("Item_type_idItem_type").equals(rs2.getString("idItem_type"))) {
+                        ItemType = rs2.getString("Item_type_Name");
+                        System.out.println("Item Name:" + rs2.getString("Item_type_Name"));
+                        break;
+                    }
+                }
+                System.out.println(rs.getString("Description"));
+                tableData.add(new Inventory_Data_Model(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), ItemType, rs.getString("Cost")));
+                System.out.println(rs.getString(1));
+            }
+
+            Table.setItems(tableData);
+
+            c.close();
+            ps.close();
+            ps1.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @FXML
+    private void Search_Itrm(ActionEvent event) {
+        Load_search();
     }
 
 }

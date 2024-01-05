@@ -19,12 +19,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -70,6 +72,8 @@ public class Button_SettingsController implements Initializable {
     private Label Item_selected;
     @FXML
     private Label Button_assignement;
+    @FXML
+    private Button Close;
 
     /**
      * Initializes the controller class.
@@ -228,6 +232,13 @@ public class Button_SettingsController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(Button_SettingsController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+    }
+
+    @FXML
+    private void Close(ActionEvent event) {
+        Stage close = (Stage) Close.getScene().getWindow();
+        close.close();
 
     }
 

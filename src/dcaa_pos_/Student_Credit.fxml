@@ -23,6 +23,7 @@
                 <ContextMenu>
                     <items>
                         <MenuItem fx:id="Select_student" mnemonicParsing="false" onAction="#Load_Selected_Student" text="Select Student" />
+                  <MenuItem fx:id="Update_menu" mnemonicParsing="false" onAction="#Update_info" text="Update Student Information" />
                     </items>
                 </ContextMenu>
             </contextMenu>
@@ -32,9 +33,9 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="8.0" layoutY="8.0" text="Student Transaction  History">
+        <Label layoutX="8.0" layoutY="8.0" prefHeight="27.0" prefWidth="494.0" text="Student  Information and Transaction  History">
             <font>
-                <Font size="18.0" />
+                <Font name="System Bold" size="18.0" />
             </font>
         </Label>
         <ButtonBar layoutX="602.0" layoutY="507.0" prefHeight="56.0" prefWidth="455.0">
@@ -44,7 +45,7 @@
                         <Font size="15.0" />
                     </font>
                 </Button>
-                <Button fx:id="AddStudent" layoutX="893.0" layoutY="26.0" mnemonicParsing="false" text="Add Student">
+                <Button fx:id="AddStudent" layoutX="893.0" layoutY="26.0" mnemonicParsing="false" onAction="#Add_STudent" text="Add Student">
                     <font>
                         <Font size="15.0" />
                     </font>
@@ -79,8 +80,8 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <ComboBox layoutX="697.0" layoutY="43.0" prefHeight="25.0" prefWidth="101.0" />
-        <TextField layoutX="811.0" layoutY="43.0" prefHeight="25.0" prefWidth="240.0">
+        <ComboBox fx:id="Search" layoutX="697.0" layoutY="43.0" onAction="#Search_" prefHeight="25.0" prefWidth="101.0" />
+        <TextField fx:id="SearchBox" layoutX="811.0" layoutY="43.0" onAction="#Search_" prefHeight="25.0" prefWidth="240.0">
             <font>
                 <Font size="13.0" />
             </font>

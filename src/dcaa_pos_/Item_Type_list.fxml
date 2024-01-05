@@ -30,13 +30,8 @@
             <contextMenu>
                 <ContextMenu fx:id="ContextMenu" onAction="#ContextMenu">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-                        <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-                        <MenuItem mnemonicParsing="false" text="Jamie" fx:id="menuJamie1" onAction="#JamieMenuAction"  />
-                        <MenuItem mnemonicParsing="false" text="Jamie" />
-                        <MenuItem mnemonicParsing="false" text="Jamie" />
-                        <MenuItem mnemonicParsing="false" text="Jamie" />
-                        <MenuItem mnemonicParsing="false" text="Jamie" />
+                        <MenuItem fx:id="Edit_item" mnemonicParsing="false" onAction="#Edit_Item" text="Edit Item" />
+                        <MenuItem fx:id="Delete_item" mnemonicParsing="false" onAction="#Delete_item" text="Delete Item" />
 
                     </items>
                 </ContextMenu>
@@ -44,10 +39,26 @@
         </TableView>
         <ButtonBar layoutX="14.0" layoutY="412.0" prefHeight="59.0" prefWidth="472.0">
             <buttons>
-                <Button layoutX="288.0" layoutY="27.0" mnemonicParsing="false" text="Add new Type" />
-                <Button mnemonicParsing="false" text="Edit" />
-                <Button layoutX="186.0" layoutY="27.0" mnemonicParsing="false" text="Delete" />
-                <Button layoutX="407.0" layoutY="27.0" mnemonicParsing="false" text="Close" />
+                <Button layoutX="288.0" layoutY="27.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="148.0" text="Add  Type">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" text="Edit">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <Button layoutX="186.0" layoutY="27.0" mnemonicParsing="false" text="Delete">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="Close" layoutX="407.0" layoutY="27.0" mnemonicParsing="false" onAction="#Close" text="Close">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
             </buttons>
         </ButtonBar>
     </children>

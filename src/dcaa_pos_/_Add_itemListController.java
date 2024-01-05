@@ -31,6 +31,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -53,6 +54,24 @@ public class _Add_itemListController implements Initializable {
     private ComboBox<String> comboItemType;
     List<String> types, IDtypes;
     Inventory_Controller inventory_;
+    boolean Update = false;
+    String ItemID = "";
+    @FXML
+    private TextField cost;
+
+    void set_Update_data(String ID, String Item_name, String Description, String price, String comboItemType, boolean Update) {
+        ItemID = ID;
+        this.Item_name.setText(Item_name);
+        this.Description.setText(Description);
+        this.price.setText(price);
+        this.comboItemType.setValue(comboItemType);
+        AddNewButton.setText("Update");
+        this.Update = Update;
+    }
+
+    public void setInventory_(Inventory_Controller inventory_) {
+        this.inventory_ = inventory_;
+    }
 
     /**
      * Initializes the controller class.
@@ -64,13 +83,16 @@ public class _Add_itemListController implements Initializable {
     }
 
     @FXML
-    private void AddNewButtoon(ActionEvent event) {
+    private void AddNewButtoon(ActionEvent event) throws SQLException {
         New_Inventory();
     }
 
     @FXML
     private void Close(ActionEvent event) {
-        System.out.println(comboItemType.getSelectionModel().getSelectedIndex());
+        //System.out.println(comboItemType.getSelectionModel().getSelectedIndex());
+        Stage close = (Stage) this.close.getScene().getWindow();
+        close.close();
+
     }
 
     void loaddata_Combobox() {
@@ -98,41 +120,70 @@ public class _Add_itemListController implements Initializable {
 
     }
 
-    void New_Inventory() {
+    void New_Inventory() throws SQLException {
         try {
             DBConnection.init();
             Connection c = DBConnection.getConnection();
             PreparedStatement ps;
 
-            String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
+            if (Update) {
+                System.out.println("tobe updated:" + ItemID);
+                ps = c.prepareStatement("Update dcaa_pos.items  SET Item_name='" + Item_name.getText() + "',Cost='" + cost.getText() + "', Description='" + Description.getText() + "', Price='" + price.getText() + "', Item_type_idItem_type='" + IDtypes.get(comboItemType.getSelectionModel().getSelectedIndex()) + "' where idItems='" + ItemID + "'");
 
-            ps = c.prepareStatement("Insert into dcaa_pos.items (Item_name, Description, Price, create_time, update_time, Item_type_idItem_type) values ('" + Item_name.getText() + "','" + Description.getText() + "','" + price.getText() + "','" + timeStamp + "','" + timeStamp + "','" + IDtypes.get(comboItemType.getSelectionModel().getSelectedIndex()) + "')");
+                if (!ps.execute()) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Inventory Update");
+                    alert.setHeaderText("Item Update");
+                    alert.setContentText("Item in Inventory with Item ID " + ItemID + "  Updated Successfully! ");
 
-            if (!ps.execute()) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Inventory");
-                alert.setHeaderText("new Item ");
-                alert.setContentText("New Item in Inventory is Created Successfully! ");
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.isPresent() && result.get() == ButtonType.OK) {
+                        Item_name.setText("");
+                        Description.setText("");
+                        price.setText("");
+                        price.requestFocus();
 
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.isPresent() && result.get() == ButtonType.OK) {
-                    Item_name.setText("");
-                    Description.setText("");
-                    price.setText("");
-                    price.requestFocus();
+                        inventory_.loaddata();
+                        Update = false;
+
+                    }
 
                 }
-            }
 
-            //FXMLLoader loader = new FXMLLoader(getClass().getResource("/dcaa_pos_/Inventory_.fxml"));
-            //inventory_ = loader.getController();
-            inventory_.LoadData();
+            } else {
+
+                String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
+
+                ps = c.prepareStatement("Insert into dcaa_pos.items (Item_name, Description, Price, create_time, update_time, Item_type_idItem_type,Cost) values ('" + Item_name.getText() + "','" + Description.getText() + "','" + price.getText() + "','" + timeStamp + "','" + timeStamp + "','" + IDtypes.get(comboItemType.getSelectionModel().getSelectedIndex()) + "','" + cost.getText() + "')");
+
+                if (!ps.execute()) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Inventory");
+                    alert.setHeaderText("New Item Entry");
+                    alert.setContentText("New Item in Inventory Created Successfully! ");
+
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.isPresent() && result.get() == ButtonType.OK) {
+                        Item_name.setText("");
+                        Description.setText("");
+                        price.setText("");
+                        cost.setText("");
+                        Item_name.requestFocus();
+
+                    }
+                }
+
+                //FXMLLoader loader = new FXMLLoader(getClass().getResource("/dcaa_pos_/Inventory_.fxml"));
+                //inventory_ = loader.getController();
+                inventory_.loaddata();
+
+            }
 
             c.close();
 
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-    }
 
+    }
 }

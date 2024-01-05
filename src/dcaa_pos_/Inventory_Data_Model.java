@@ -11,14 +11,15 @@ package dcaa_pos_;
  */
 public class Inventory_Data_Model {
 
-    String ID, Item_name, Description, Price, ItemType;
+    String ID, Item_name, Description, Price, ItemType, Cost;
 
-    public Inventory_Data_Model(String ID, String Item_name, String Description, String Price, String ItemType) {
+    public Inventory_Data_Model(String ID, String Item_name, String Description, String Price, String ItemType, String Cost) {
         this.ID = ID;
         this.Item_name = Item_name;
         this.Description = Description;
         this.Price = Price;
         this.ItemType = ItemType;
+        this.Cost = Cost;
     }
 
     public String getID() {
@@ -59,6 +60,14 @@ public class Inventory_Data_Model {
 
     public void setItemType(String ItemType) {
         this.ItemType = ItemType;
+    }
+
+    public String getCost() {
+        return Cost;
+    }
+
+    public void setCost(String Cost) {
+        this.Cost = Cost;
     }
 
 }

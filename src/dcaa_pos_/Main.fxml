@@ -9,14 +9,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="661.0" prefWidth="1094.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dcaa_pos_.MainController">
+<AnchorPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="661.0" prefWidth="1094.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dcaa_pos_.MainController">
     <children>
         <MenuBar fx:id="sales_invoice" layoutY="2.0" onDragDetected="#sales_invoice" prefHeight="25.0" prefWidth="355.0">
             <menus>
-                <Menu mnemonicParsing="false" text="New User Account">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Close" />
-                    </items>
+                <Menu fx:id="Close" mnemonicParsing="false" text="System Close">
+               <items>
+                  <MenuItem fx:id="Log_out_" mnemonicParsing="false" onAction="#Log_out" text="Log out" />
+               </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Settings">
                     <items>
@@ -38,6 +38,7 @@
                 <Button fx:id="Items_" layoutX="100.0" layoutY="13.0" mnemonicParsing="false" onAction="#Open_Item_Inventory" text="Item Inventory" />
             <Button fx:id="Student" layoutX="201.0" layoutY="13.0" mnemonicParsing="false" onAction="#Add_Student" text="Add Student" />
             <Button fx:id="StudentCreit" mnemonicParsing="false" onAction="#OpenCreditHistory" text="Student Credit" />
+            <Button fx:id="Sales_Invoice" mnemonicParsing="false" onAction="#Open_Sales_invoice" text="Sales Invoice" />
             </items>
         </ToolBar>
         <AnchorPane layoutX="-1.0" layoutY="67.0" prefHeight="593.0" prefWidth="1094.0">
@@ -47,7 +48,7 @@
                         <Font size="16.0" />
                     </font>
                 </Label>
-                <Label fx:id="Date_time" layoutX="942.0" layoutY="554.0" prefHeight="17.0" prefWidth="146.0" text="Date Time">
+                <Label fx:id="Date_time" alignment="CENTER_RIGHT" layoutX="748.0" layoutY="554.0" prefHeight="25.0" prefWidth="340.0" text="Date Time" textAlignment="RIGHT">
                     <font>
                         <Font size="16.0" />
                     </font>

@@ -8,6 +8,7 @@ import dcaa_pos_.DBConnection;
 import dcaa_pos_.FXMLDocumentController;
 import dcaa_pos_.Inventory_Data_Model;
 import dcaa_pos_.Student_Credit_history_data_Model;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,10 +24,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
@@ -34,7 +39,9 @@ import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -81,6 +88,12 @@ public class Student_CreditController implements Initializable {
     private TextField AddCredit_;
     @FXML
     private Button Close_;
+    @FXML
+    private MenuItem Update_menu;
+    @FXML
+    private ComboBox<String> Search;
+    @FXML
+    private TextField SearchBox;
 
     /**
      * Initializes the controller class.
@@ -98,9 +111,9 @@ public class Student_CreditController implements Initializable {
         //loaddata_Credit();
         labelCredit.setVisible(false);
         AddCredit_.setVisible(false);
-
+        loadcombo_data();
     }
-    String Data;
+    String Data, NFC_Card_No;
 
     @FXML
     private void Load_Selected_Student(ActionEvent event) {
@@ -118,12 +131,12 @@ public class Student_CreditController implements Initializable {
 
             Connection c = DBConnection.getConnection();
 
-            PreparedStatement ps = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID FROM dcaa_pos.student_info where Student_ID='" + Data + "' ");
+            PreparedStatement ps = c.prepareStatement("SELECT  NFC_Card_No,F_name, M_name, L_Name, Student_ID FROM dcaa_pos.student_info where Student_ID='" + Data + "' ");
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Student_ID.setText("Student ID: " + rs.getString("Student_ID"));
+                Student_ID.setText("Student ID: " + rs.getString("Student_ID") + "   " + "NFC:" + rs.getString("NFC_Card_No"));
                 Student_name.setText("Student Name: " + rs.getString("L_name") + ", " + rs.getString("F_name") + " " + rs.getString("M_name"));
-
+                NFC_Card_No = rs.getString("NFC_Card_No");
                 loaddata_Credit(Data);
             }
 
@@ -133,13 +146,14 @@ public class Student_CreditController implements Initializable {
 
     }
 
-    private void loaddata() {
+    void loaddata() {
 
         DBConnection.init();
 
         Connection c = DBConnection.getConnection();
 
         PreparedStatement ps;
+        tableDataStudentList.clear();
         try {
             ps = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID FROM dcaa_pos.student_info");
             ResultSet rs = ps.executeQuery();
@@ -168,7 +182,7 @@ public class Student_CreditController implements Initializable {
         tableDataTransaction.clear();
         Total_credit.setText("Total Credit:  Php " + 0);
         try {
-            ps = c.prepareStatement("SELECT  idCredit_history, StudentID, Credit, createtime, userID, Transaction_type, OR_ FROM dcaa_pos.credit_history where StudentID='" + StudentID + "'");
+            ps = c.prepareStatement("SELECT  idCredit_history, StudentID, Credit, createtime, userID, Transaction_type, OR_ FROM dcaa_pos.credit_history where StudentID='" + StudentID + "' order by createtime DESC");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 tableDataTransaction.add(new Student_Credit_history_data_Model(rs.getString("idCredit_history"), rs.getString("OR_"), rs.getString("Credit"), rs.getString("Transaction_type"), rs.getString("createtime")));
@@ -240,7 +254,7 @@ public class Student_CreditController implements Initializable {
                 String OR_Credit = "C" + String.format("%09d", Integer.parseInt(rs.getString(1)) + 1);
                 System.out.println(OR_Credit);
 
-                ps = c.prepareStatement("Insert into credit_history (StudentID, Credit, createtime, userID, Transaction_type, OR_)values ('" + Data + "','" + AddCredit_.getText() + "','" + timeStamp + "','" + 1 + "','credit','" + OR_Credit + "') ");
+                ps = c.prepareStatement("Insert into credit_history (StudentID, Credit, createtime, userID, Transaction_type, OR_,NFC_Card_No)values ('" + Data + "','" + AddCredit_.getText() + "','" + timeStamp + "','" + 1 + "','credit','" + OR_Credit + "','" + NFC_Card_No + "') ");
                 if (!ps.execute()) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Student Credit ");
@@ -250,6 +264,7 @@ public class Student_CreditController implements Initializable {
                     if (result.isPresent() && result.get() == ButtonType.OK) {
                         AddCredit_.setText("");
                         AddCredit_.requestFocus();
+                        NFC_Card_No = "";
 
                     }
                 }
@@ -271,4 +286,124 @@ public class Student_CreditController implements Initializable {
         close.close();
     }
 
+    @FXML
+    private void Add_STudent(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dcaa_pos_/Student_info.fxml"));
+            Parent root1 = loader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setTitle("Student Information");
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(Inventory_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    Student_infoController studentinfo;
+
+    @FXML
+    private void Update_info(ActionEvent event) throws SQLException {
+        try {
+
+            TablePosition pos = TableStudent.getSelectionModel().getSelectedCells().get(0);
+            int row = pos.getRow();
+            System.out.println(row + " row");
+            Student_Credit_history_data_Model item = TableStudent.getItems().get(row);
+            TableColumn col = pos.getTableColumn();
+
+            Data = (String) col.getCellObservableValue(item).getValue();
+            System.out.println(Data);
+
+            DBConnection.init();
+
+            Connection c = DBConnection.getConnection();
+
+            PreparedStatement ps = c.prepareStatement("SELECT  NFC_Card_No,F_name, M_name, L_Name, Student_ID FROM dcaa_pos.student_info where Student_ID='" + Data + "' ");
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/dcaa_pos_/Student_info.fxml"));
+                Parent root1 = loader.load();
+                studentinfo = loader.getController();
+                studentinfo.update_Student(rs.getString("Student_ID"), rs.getString("F_name"), rs.getString("M_name"), rs.getString("L_name"), rs.getString("NFC_Card_No"), this);
+                Stage stage = new Stage();
+                stage.initModality(Modality.WINDOW_MODAL);
+                stage.initStyle(StageStyle.DECORATED);
+                stage.setTitle("Student Information Update");
+                stage.setScene(new Scene(root1));
+                stage.show();
+
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(Student_CreditController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void Search_(ActionEvent event) {
+
+        DBConnection.init();
+
+        Connection c = DBConnection.getConnection();
+
+        String ItemName = "";
+        String Search = "%" + SearchBox.getText() + "%";
+
+        PreparedStatement ps;
+        ResultSet rs = null;
+        tableDataStudentList.clear();
+        try {
+
+            switch (this.Search.getSelectionModel().getSelectedIndex()) {
+                case 0:
+                    ps = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID FROM dcaa_pos.student_info where Student_ID like '" + Search + "'");
+                    rs = ps.executeQuery();
+                    break;
+                case 1:
+                    ps = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID FROM dcaa_pos.student_info where L_Name like '" + Search + "'");
+                    rs = ps.executeQuery();
+                    break;
+                case 2:
+                    ps = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID FROM dcaa_pos.student_info where F_name like '" + Search + "'");
+                    rs = ps.executeQuery();
+                    break;
+                case 3:
+                    ps = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID FROM dcaa_pos.student_info where M_name like '" + Search + "'");
+                    rs = ps.executeQuery();
+                    break;
+                default:
+                    ps = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID FROM dcaa_pos.student_info");
+                    rs = ps.executeQuery();
+                    break;
+            }
+
+            while (rs.next()) {
+                tableDataStudentList.add(new Student_Credit_history_data_Model(rs.getString("Student_ID"), rs.getString("L_Name") + ", " + rs.getString("F_Name") + " " + rs.getString("M_Name")));
+                System.out.println(rs.getString("Student_ID"));
+            }
+
+            TableStudent.setItems(tableDataStudentList);
+
+            c.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    void loadcombo_data() {
+
+        ObservableList<String> data = FXCollections.observableArrayList();
+
+        data.add("Student Id");
+        data.add("Student Last Name");
+        data.add("Student First Name");
+        data.add("Student Middle Name");
+        Search.setItems(data);
+        //OptionsCombo.setValue("Select User Level");
+
+    }
 }

@@ -5,6 +5,7 @@
  */
 package dcaa_pos_;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,13 +18,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -43,7 +51,13 @@ public class Item_Type_listController implements Initializable {
     @FXML
     private ContextMenu ContextMenu;
     @FXML
-    private MenuItem menuJamie1;
+    private Button Close;
+    @FXML
+    private MenuItem Edit_item;
+    @FXML
+    private MenuItem Delete_item;
+
+    Item_typeController item_controller;
 
     /**
      * Initializes the controller class.
@@ -97,6 +111,38 @@ public class Item_Type_listController implements Initializable {
         System.out.println(Data);
         System.out.println(ItemTypeTable.getItems().get(row).getID());
 
+    }
+
+    @FXML
+    private void Close(ActionEvent event) {
+        Stage close = (Stage) Close.getScene().getWindow();
+        close.close();
+
+    }
+
+    @FXML
+    private void Edit_Item(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dcaa_pos_/Item_type.fxml"));
+            Parent root1 = loader.load();
+            item_controller = loader.getController();
+            // add_itemListController.inventory_ = this;
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setTitle("Add new Item");
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(Item_Type_listController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @FXML
+    private void Delete_item(ActionEvent event) {
+        System.out.println("Delete Item");
     }
 
 }

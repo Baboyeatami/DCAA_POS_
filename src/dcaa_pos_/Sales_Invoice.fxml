@@ -9,20 +9,21 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="641.0" prefWidth="1022.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dcaa_pos_.Sales_InvoiceController">
    <children>
       <AnchorPane layoutX="13.0" layoutY="5.0" prefHeight="624.0" prefWidth="940.0">
          <children>
-            <TableView fx:id="table" layoutX="10.0" layoutY="93.0" prefHeight="450.0" prefWidth="989.0">
+            <TableView fx:id="table" layoutX="10.0" layoutY="93.0" prefHeight="427.0" prefWidth="989.0">
               <columns>
                 <TableColumn fx:id="Item_name" prefWidth="125.0" text="Item Name" />
                 <TableColumn fx:id="Quantity" prefWidth="117.0" text="Quantity" />
                   <TableColumn fx:id="Price" prefWidth="118.0" text="Price" />
                   <TableColumn fx:id="SubTotal" prefWidth="144.0" text="Sub Total" />
                   <TableColumn fx:id="Or_number" prefWidth="158.0" text="Or Number" />
-                  <TableColumn fx:id="Student_id" prefWidth="153.0" text="Student ID " />
+                  <TableColumn fx:id="Student_id" prefWidth="153.0" text="NFC No." />
                   <TableColumn fx:id="date" prefWidth="173.0" text="Date (YYYY-MM-DD: Hrs)" />
               </columns>
             </TableView>
@@ -30,19 +31,43 @@
               <buttons>
                 <Button fx:id="refresh" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="73.0" mnemonicParsing="false" onAction="#Refresh" prefHeight="52.0" prefWidth="70.0" text="Refresh" />
                   <Button layoutX="561.0" layoutY="18.0" minWidth="41.0" mnemonicParsing="false" prefHeight="52.0" text="Print Selected" />
-                  <Button layoutX="666.0" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="73.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="70.0" text="Close" />
-                  <Button layoutX="539.0" layoutY="22.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="73.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="70.0" text="Close" />
+                  <Button fx:id="LoadData" layoutX="666.0" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="73.0" mnemonicParsing="false" onAction="#Load_Data_day" prefHeight="51.0" prefWidth="256.0" text="Load Data" />
+                  <Button fx:id="Btn_close" layoutX="539.0" layoutY="22.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="73.0" mnemonicParsing="false" onAction="#Close_Sales_invoice" prefHeight="52.0" prefWidth="70.0" text="Close" />
               </buttons>
             </ButtonBar>
-            <Label layoutX="32.0" layoutY="55.0" text="Search By:" />
-            <ComboBox fx:id="combo" layoutX="95.0" layoutY="51.0" prefHeight="25.0" prefWidth="123.0" promptText="Select Options" />
-            <TextField fx:id="search" layoutX="228.0" layoutY="51.0" onAction="#LoadSerachDAta" prefHeight="25.0" prefWidth="200.0" />
-            <DatePicker fx:id="datetime" layoutX="779.0" layoutY="40.0" prefHeight="31.0" prefWidth="206.0" />
+            <Label layoutX="21.0" layoutY="55.0" text="Search By:">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <ComboBox fx:id="combo" layoutX="100.0" layoutY="53.0" prefHeight="25.0" prefWidth="123.0" promptText="Select Options" />
+            <TextField fx:id="search" layoutX="228.0" layoutY="51.0" onAction="#LoadSerachDAta" prefHeight="32.0" prefWidth="225.0" />
+            <Pane layoutX="693.0" layoutY="17.0" prefHeight="69.0" prefWidth="293.0">
+               <children>
+                  <DatePicker fx:id="datetime" layoutX="154.0" layoutY="28.0" prefHeight="31.0" prefWidth="127.0" />
+                  <Label layoutX="154.0" layoutY="10.0" prefHeight="17.0" prefWidth="89.0" text="To">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="datetime1" layoutY="27.0" prefHeight="31.0" prefWidth="127.0" />
+                  <Label layoutY="9.0" prefHeight="17.0" prefWidth="89.0" text="From">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
             <Label layoutX="14.0" layoutY="6.0" text="Sales Invoice">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
             </Label>
+            <Label fx:id="subtotal" layoutX="11.0" layoutY="520.0" prefHeight="32.0" prefWidth="519.0" text="Sub Total:" textFill="#f20d0d">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="693.0" layoutY="-2.0" prefHeight="39.0" prefWidth="188.0" text="Date Format: MM/DD/YYYY" />
          </children>
       </AnchorPane>
    </children>

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="303.0" prefWidth="497.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dcaa_pos_.Student_infoController">
+<AnchorPane id="AnchorPane" prefHeight="351.0" prefWidth="497.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dcaa_pos_.Student_infoController">
    <children>
       <Label layoutX="35.0" layoutY="63.0" prefHeight="27.0" prefWidth="102.0" text="Student ID:">
          <font>
@@ -49,19 +49,24 @@
             <Font size="18.0" />
          </font>
       </TextField>
-      <ButtonBar layoutX="15.0" layoutY="256.0" prefHeight="40.0" prefWidth="468.0">
+      <ButtonBar layoutX="15.0" layoutY="297.0" prefHeight="40.0" prefWidth="468.0">
         <buttons>
-          <Button mnemonicParsing="false" text="Update">
+          <Button fx:id="Scan_Card" mnemonicParsing="false" onAction="#Scan_Card" text="Scan Card">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="423.0" layoutY="18.0" mnemonicParsing="false" onAction="#SaveData" text="Save">
+            <Button fx:id="Btn_Update" mnemonicParsing="false" onAction="#SaveData" text="Update">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="338.0" layoutY="18.0" mnemonicParsing="false" text="Close">
+            <Button fx:id="Btn_dave" layoutX="423.0" layoutY="18.0" mnemonicParsing="false" onAction="#SaveData" text="Save">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="Close" layoutX="338.0" layoutY="18.0" mnemonicParsing="false" onAction="#Close" text="Close">
                <font>
                   <Font size="15.0" />
                </font>
@@ -73,5 +78,15 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <Label layoutX="23.0" layoutY="251.0" prefHeight="27.0" prefWidth="114.0" text="NFC Card No.">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="NFC_textbox" layoutX="150.0" layoutY="247.0" prefHeight="39.0" prefWidth="327.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

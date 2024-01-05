@@ -9,14 +9,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="266.0" prefWidth="469.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dcaa_pos_._Add_itemListController">
+<AnchorPane id="AnchorPane" prefHeight="309.0" prefWidth="474.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dcaa_pos_._Add_itemListController">
    <children>
       <Label layoutX="6.0" layoutY="-4.0" text="New Item">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <ButtonBar layoutY="215.0" prefHeight="40.0" prefWidth="469.0">
+      <ButtonBar layoutX="11.0" layoutY="246.0" prefHeight="40.0" prefWidth="450.0">
         <buttons>
           <Button fx:id="AddNewButton" mnemonicParsing="false" onAction="#AddNewButtoon" text="Add new Item">
                <font>
@@ -47,10 +47,15 @@
                   <Font size="15.0" />
                </font>
             </TextField>
-            <ComboBox fx:id="comboItemType" prefHeight="40.0" prefWidth="368.0" />
+            <TextField fx:id="cost" layoutX="10.0" layoutY="82.0" prefHeight="31.0" prefWidth="299.0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <ComboBox fx:id="comboItemType" prefHeight="40.0" prefWidth="368.0" promptText="Select item Type" />
          </children>
       </VBox>
-      <VBox layoutX="6.0" layoutY="46.0" prefHeight="149.0" prefWidth="86.0" spacing="15.0">
+      <VBox layoutX="6.0" layoutY="46.0" prefHeight="192.0" prefWidth="86.0" spacing="15.0">
          <children>
             <Label text="Item Name">
                <font>
@@ -63,6 +68,11 @@
                </font>
             </Label>
             <Label text="Price (Php)">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="82.0" text="Cost (Php)">
                <font>
                   <Font size="15.0" />
                </font>

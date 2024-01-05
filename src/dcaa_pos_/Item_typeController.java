@@ -24,6 +24,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
 /**
@@ -57,6 +58,9 @@ public class Item_typeController implements Initializable {
 
     @FXML
     private void Close(ActionEvent event) {
+        Stage close = (Stage) Close.getScene().getWindow();
+        close.close();
+
     }
 
     void AddnewItemType() {
@@ -85,6 +89,21 @@ public class Item_typeController implements Initializable {
 
         } catch (SQLException ex) {
             System.out.println(ex);
+        }
+
+    }
+
+    void Update_Item() {
+        try {
+            DBConnection.init();
+            Connection c = DBConnection.getConnection();
+            PreparedStatement ps;
+
+            String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
+
+            ps = c.prepareStatement("Insert into item_type (Item_type_Name, Description, update_time, create_time) values ('" + Item_name.getText() + "','" + Item_description.getText() + "','" + timeStamp + "','" + timeStamp + "')");
+        } catch (SQLException ex) {
+            Logger.getLogger(Item_typeController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

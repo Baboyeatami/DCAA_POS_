@@ -1,0 +1,29 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/*
+    Created on : 06 22, 23, 11:44:40 AM
+    Author     : Jamie Eduardo Rosal <Jamiewertalmighty@gmail.com>
+*/
+
+.tab .tab-label {
+    -fx-skin: "com.sun.javafx.scene.control.skin.LabelSkin";
+    -fx-background-color: transparent;
+    -fx-alignment: CENTER;
+    -fx-text-fill: -fx-text-base-color;
+    -fx-font-size: 20px; /* all the same except this newly added one */
+}
+.grid{
+
+    -fx-padding: 7px;
+}
+.tab{
+    -fx-padding: 15px;
+    -fx-alignment: CENTER;
+
+}
+
+
+
+

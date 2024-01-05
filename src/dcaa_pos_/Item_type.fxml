@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dcaa_pos_.Item_typeController">
+<AnchorPane id="AnchorPane" prefHeight="321.0" prefWidth="521.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dcaa_pos_.Item_typeController">
     <children>
         <Label layoutX="117.0" layoutY="81.0" text="Item Name">
             <font>
@@ -24,7 +24,7 @@
                 <Font size="15.0" />
             </font>
         </Label>
-        <TextField fx:id="Item_description" layoutX="205.0" layoutY="107.0" prefHeight="77.0" prefWidth="299.0">
+        <TextField fx:id="Item_description" layoutX="205.0" layoutY="107.0" prefHeight="123.0" prefWidth="299.0">
             <font>
                 <Font size="15.0" />
             </font>
@@ -34,7 +34,7 @@
                 <Font size="25.0" />
             </font>
         </Label>
-        <ButtonBar layoutX="17.0" layoutY="350.0" prefHeight="40.0" prefWidth="580.0">
+        <ButtonBar layoutX="10.0" layoutY="259.0" prefHeight="40.0" prefWidth="500.0">
             <buttons>
                 <Button fx:id="Save_Button" mnemonicParsing="false" onAction="#Save_new_item" text="Add new Item Type">
                     <font>
