@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="577.0" prefWidth="1073.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dcaa_pos_.Student_CreditController">
+    <children>
+        <TableView fx:id="TableStudent" layoutX="603.0" layoutY="121.0" prefHeight="380.0" prefWidth="455.0">
+            <columns>
+                <TableColumn fx:id="Student_Id_table" prefWidth="193.0" text="Student ID" />
+                <TableColumn fx:id="StudentName" prefWidth="253.0" text="Name" />
+            </columns>
+            <contextMenu>
+                <ContextMenu>
+                    <items>
+                        <MenuItem fx:id="Select_student" mnemonicParsing="false" onAction="#Load_Selected_Student" text="Select Student" />
+                  <MenuItem fx:id="Update_menu" mnemonicParsing="false" onAction="#Update_info" text="Update Student Information" />
+                    </items>
+                </ContextMenu>
+            </contextMenu>
+        </TableView>
+        <Label layoutX="603.0" layoutY="8.0" text="Student List">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="8.0" layoutY="8.0" prefHeight="27.0" prefWidth="494.0" text="Student  Information and Transaction  History">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <ButtonBar layoutX="602.0" layoutY="507.0" prefHeight="56.0" prefWidth="455.0">
+            <buttons>
+                <Button fx:id="AddCredit" mnemonicParsing="false" onAction="#View_AddCredit" text="Add Credit">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="AddStudent" layoutX="893.0" layoutY="26.0" mnemonicParsing="false" onAction="#Add_STudent" text="Add Student">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Button>
+            <Button fx:id="Close_" layoutX="140.0" layoutY="23.0" mnemonicParsing="false" onAction="#Close" text="Close">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            </buttons>
+        </ButtonBar>
+        <TableView fx:id="TableTransaction" layoutX="29.0" layoutY="122.0" prefHeight="309.0" prefWidth="557.0">
+            <columns>
+                <TableColumn fx:id="OR" prefWidth="112.0" text="OR Number" />
+                <TableColumn fx:id="Amount" prefWidth="113.0" text="Amount" />
+                <TableColumn fx:id="TransactionType" prefWidth="197.0" text="Transaction Type" />
+                <TableColumn fx:id="Date" prefWidth="134.0" text="Date" />
+            </columns>
+        </TableView>
+        <Label fx:id="Student_ID" layoutX="29.0" layoutY="50.0" prefHeight="17.0" prefWidth="389.0" text="Student ID">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <Label fx:id="Student_name" layoutX="29.0" layoutY="86.0" prefHeight="17.0" prefWidth="389.0" text="Student Name">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="603.0" layoutY="42.0" prefHeight="27.0" prefWidth="109.0" text="Search by:">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <ComboBox fx:id="Search" layoutX="697.0" layoutY="43.0" onAction="#Search_" prefHeight="25.0" prefWidth="101.0" />
+        <TextField fx:id="SearchBox" layoutX="811.0" layoutY="43.0" onAction="#Search_" prefHeight="25.0" prefWidth="240.0">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </TextField>
+      <Label fx:id="Total_credit" layoutX="29.0" layoutY="440.0" prefHeight="47.0" prefWidth="557.0" text="Total Credit:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="AddCredit_" layoutX="159.0" layoutY="492.0" onAction="#AddCredit" prefHeight="44.0" prefWidth="287.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label fx:id="labelCredit" layoutX="52.0" layoutY="499.0" prefHeight="30.0" prefWidth="101.0" text="Add Credit:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>
