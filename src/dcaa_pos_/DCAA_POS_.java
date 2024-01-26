@@ -28,12 +28,12 @@ public class DCAA_POS_ extends Application {
     public void start(Stage stage) throws Exception {
 
         try {
-
+            System.out.println(System.getProperty("user.dir"));
             Add_Buttons();
             check_Card_Coloum();
             check_Card_Credithistory();
             check_invoice_ramakrs();
-
+            check_StudentImageStatus();
         } catch (SQLException ex) {
             Logger.getLogger(DCAA_POS_.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -71,6 +71,33 @@ public class DCAA_POS_ extends Application {
                 System.out.println("Alter table completed ");
             } else {
                 System.out.println("Remarks coloum exist: no table altered");
+            }
+
+        } catch (IOException ex) {
+            //Logger.getLogger(DCAA_BILLING.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    static void check_StudentImageStatus() throws SQLException {
+
+        try {
+            DBConnection.ReadIPaddress();
+            DBConnection.init();
+            PreparedStatement ps;
+            ResultSet rs;
+            Connection c = DBConnection.getConnection();
+            System.out.println("image data Check");
+            ps = c.prepareStatement("Show columns from dcaa_pos.student_info where field ='image_data'");
+            rs = ps.executeQuery();
+
+            if (!rs.next()) {
+                //System.out.println(rs.getString(1) + " Card Reading  check_Card_Coloum();");
+                ps = c.prepareStatement("ALTER TABLE dcaa_pos.student_info ADD COLUMN image_data MEDIUMBLOB");
+                ps.execute();
+                System.out.println("Alter table imagedata  in student info completed ");
+            } else {
+                System.out.println("image coloum exist: no table altered");
             }
 
         } catch (IOException ex) {

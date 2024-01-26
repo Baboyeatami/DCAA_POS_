@@ -9,7 +9,9 @@ import dcaa_pos_.FXMLDocumentController;
 import dcaa_pos_.Inventory_Data_Model;
 import dcaa_pos_.Student_Credit_history_data_Model;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -305,41 +307,42 @@ public class Student_CreditController implements Initializable {
 
     @FXML
     private void Update_info(ActionEvent event) throws SQLException {
-        try {
 
-            TablePosition pos = TableStudent.getSelectionModel().getSelectedCells().get(0);
-            int row = pos.getRow();
-            System.out.println(row + " row");
-            Student_Credit_history_data_Model item = TableStudent.getItems().get(row);
-            TableColumn col = pos.getTableColumn();
+        TablePosition pos = TableStudent.getSelectionModel().getSelectedCells().get(0);
+        int row = pos.getRow();
+        System.out.println(row + " row");
+        Student_Credit_history_data_Model item = TableStudent.getItems().get(row);
+        TableColumn col = pos.getTableColumn();
 
-            Data = (String) col.getCellObservableValue(item).getValue();
-            System.out.println(Data);
+        Data = (String) col.getCellObservableValue(item).getValue();
+        System.out.println(Data);
 
-            DBConnection.init();
+        DBConnection.init();
 
-            Connection c = DBConnection.getConnection();
+        Connection c = DBConnection.getConnection();
 
-            PreparedStatement ps = c.prepareStatement("SELECT  NFC_Card_No,F_name, M_name, L_Name, Student_ID FROM dcaa_pos.student_info where Student_ID='" + Data + "' ");
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+        PreparedStatement ps = c.prepareStatement("SELECT  NFC_Card_No,F_name, M_name, L_Name, Student_ID,image_data FROM dcaa_pos.student_info where Student_ID='" + Data + "' ");
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
 
+            try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/dcaa_pos_/Student_info.fxml"));
                 Parent root1 = loader.load();
                 studentinfo = loader.getController();
                 studentinfo.update_Student(rs.getString("Student_ID"), rs.getString("F_name"), rs.getString("M_name"), rs.getString("L_name"), rs.getString("NFC_Card_No"), this);
+                studentinfo.Load_image_data(rs.getString("Student_ID"));
                 Stage stage = new Stage();
                 stage.initModality(Modality.WINDOW_MODAL);
                 stage.initStyle(StageStyle.DECORATED);
                 stage.setTitle("Student Information Update");
                 stage.setScene(new Scene(root1));
                 stage.show();
-
+            } catch (IOException ex) {
+                Logger.getLogger(Student_CreditController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        } catch (IOException ex) {
-            Logger.getLogger(Student_CreditController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     @FXML

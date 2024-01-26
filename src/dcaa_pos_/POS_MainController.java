@@ -6,8 +6,12 @@
 package dcaa_pos_;
 
 import com.sun.applet2.preloader.event.UserDeclinedEvent;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,6 +47,8 @@ import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -279,6 +285,8 @@ public class POS_MainController implements Initializable {
     private MenuItem removed_Item;
     @FXML
     private ContextMenu yyyyy;
+    @FXML
+    private ImageView Imageview;
 
     public void setUserID(String UserID) {
         this.UserID = UserID;
@@ -804,6 +812,7 @@ public class POS_MainController implements Initializable {
 
     @FXML
     private void Student_ID___(ActionEvent event) {
+
         Student_Id.requestFocus();;
         Mode_label.setText("Mode: Enter Student ID");
 
@@ -812,49 +821,48 @@ public class POS_MainController implements Initializable {
 
     @FXML
     private void Student_ID_Action(ActionEvent event) throws SQLException {
-        Main_Pane.requestFocus();
-        System.out.println("Student ID ..");
+        try {
+            Main_Pane.requestFocus();
+            System.out.println("Student ID ..");
+            Load_image_data(Student_Id.getText());
+            DBConnection.init();
+            Connection c = DBConnection.getConnection();
+            PreparedStatement ps, ps1;
+            ResultSet rs, rs1;
+            Double debit = 0.0, credit = 0.0;
+            String ID = Student_Id.getText();
+            ps = c.prepareStatement("SELECT sum(Credit),StudentID FROM dcaa_pos.credit_history where Transaction_type='credit' and  NFC_Card_No='" + ID + "'");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                if (rs.getString(1) == null) {
+                    credit = 0.0;
+                } else {
+                    credit = Double.valueOf(rs.getString(1));
+                    System.out.println("debit:" + debit);
+                }
 
-        DBConnection.init();
-
-        Connection c = DBConnection.getConnection();
-
-        PreparedStatement ps, ps1;
-        ResultSet rs, rs1;
-        Double debit = 0.0, credit = 0.0;
-        String ID = Student_Id.getText();
-
-        ps = c.prepareStatement("SELECT sum(Credit),StudentID FROM dcaa_pos.credit_history where Transaction_type='credit' and  NFC_Card_No='" + ID + "'");
-        rs = ps.executeQuery();
-        if (rs.next()) {
-            if (rs.getString(1) == null) {
-                credit = 0.0;
-            } else {
-                credit = Double.valueOf(rs.getString(1));
-                System.out.println("debit:" + debit);
+                StudentID = rs.getString("StudentID");
             }
-
-            StudentID = rs.getString("StudentID");
-        }
-
-        ps1 = c.prepareStatement("SELECT sum(Credit),StudentID FROM dcaa_pos.credit_history where Transaction_type='debit' and  NFC_Card_No='" + ID + "'");
-        rs1 = ps1.executeQuery();
-        if (rs1.next()) {
-            if (rs1.getString(1) == null) {
-                debit = 0.0;
-            } else {
-                debit = Double.valueOf(rs1.getString(1));
-                System.out.println("debit:" + debit);
+            ps1 = c.prepareStatement("SELECT sum(Credit),StudentID FROM dcaa_pos.credit_history where Transaction_type='debit' and  NFC_Card_No='" + ID + "'");
+            rs1 = ps1.executeQuery();
+            if (rs1.next()) {
+                if (rs1.getString(1) == null) {
+                    debit = 0.0;
+                } else {
+                    debit = Double.valueOf(rs1.getString(1));
+                    System.out.println("debit:" + debit);
+                }
+                StudentID = rs1.getString("StudentID");
             }
-            StudentID = rs1.getString("StudentID");
+            Current = credit - debit;
+            StudentCredit.setText("Student Credit:" + Current);
+            ps.close();
+            ps1.close();
+            rs.close();
+            rs1.close();
+        } catch (IOException ex) {
+            Logger.getLogger(POS_MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Current = credit - debit;
-
-        StudentCredit.setText("Student Credit:" + Current);
-        ps.close();
-        ps1.close();
-        rs.close();
-        rs1.close();
 
     }
 
@@ -1485,6 +1493,12 @@ public class POS_MainController implements Initializable {
                 System.out.println("Card Status");
             }
 
+            try {
+                Load_image_data(StudentID);
+            } catch (IOException ex) {
+                Logger.getLogger(POS_MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(POS_MainController.class.
                     getName()).log(Level.SEVERE, null, ex);
@@ -1601,5 +1615,40 @@ public class POS_MainController implements Initializable {
             JOptionPane.showMessageDialog(null, "Scan a Valid Card to proceed.");
         }
 
+    }
+
+    void Load_image_data(String id) throws IOException {
+
+        try {
+            DBConnection.ReadIPaddress();
+            DBConnection.init();
+            PreparedStatement ps = null;
+            ResultSet rs;
+            Connection c = DBConnection.getConnection();
+            ps = c.prepareStatement("SELECT image_data FROM dcaa_pos.student_info where Student_ID='" + id + "'");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                Blob blob = rs.getBlob("image_data");
+                InputStream inputStream;
+                Image image;
+                if (blob != null) {
+                    inputStream = blob.getBinaryStream();
+
+                    image = new Image(inputStream);
+                    Imageview.setImage(image);
+                } else {
+                    File file = new File(System.getProperty("user.dir") + "\\no-avatar.png");
+
+                    inputStream = new FileInputStream(file);
+                    image = new Image(inputStream);  // Replace with the actual path to your .png file
+
+                    Imageview.setImage(image);
+
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(POS_MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

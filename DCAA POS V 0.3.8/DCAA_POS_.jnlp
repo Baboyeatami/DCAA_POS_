@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="DCAA_POS_.jnlp">
+  <information>
+    <title>DCAA_POS_</title>
+    <vendor>Jamie</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="DCAA_POS_.jar" size="115687" download="eager" />
+    <jar href="lib\mysql-connector-java-8.0.11.jar" size="2036609" download="eager" />
+    <jar href="lib\opencv-3416.jar" size="646795" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="800" height="600" main-class="dcaa_pos_.DCAA_POS_"  name="DCAA_POS_" />
+  <update check="always"/>
+</jnlp>

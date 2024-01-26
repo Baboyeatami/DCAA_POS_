@@ -4,10 +4,11 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="351.0" prefWidth="497.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dcaa_pos_.Student_infoController">
+<AnchorPane id="AnchorPane" prefHeight="351.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dcaa_pos_.Student_infoController">
    <children>
       <Label layoutX="35.0" layoutY="63.0" prefHeight="27.0" prefWidth="102.0" text="Student ID:">
          <font>
@@ -88,5 +89,8 @@
             <Font size="18.0" />
          </font>
       </TextField>
+      <ImageView fx:id="imageView" fitHeight="223.0" fitWidth="260.0" layoutX="483.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="FileChooser" layoutX="645.0" layoutY="305.0" mnemonicParsing="false" onAction="#SelectFile" prefHeight="25.0" prefWidth="87.0" text="Select File" />
+      <Button fx:id="ImageCapture" layoutX="539.0" layoutY="305.0" mnemonicParsing="false" onAction="#ImageCapture_" text="Image Capture" />
    </children>
 </AnchorPane>

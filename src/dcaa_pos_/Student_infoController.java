@@ -4,7 +4,15 @@
  */
 package dcaa_pos_;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,8 +29,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 import javax.smartcardio.Card;
 import javax.smartcardio.CardChannel;
 import javax.smartcardio.CardException;
@@ -31,6 +45,7 @@ import javax.smartcardio.CardTerminals;
 import javax.smartcardio.CommandAPDU;
 import javax.smartcardio.ResponseAPDU;
 import javax.smartcardio.TerminalFactory;
+import org.opencv.core.Mat;
 
 /**
  * FXML Controller class
@@ -59,6 +74,13 @@ public class Student_infoController implements Initializable {
     @FXML
     private Button Btn_dave;
 
+    @FXML
+    private ImageView imageView;
+    @FXML
+    private Button FileChooser;
+    @FXML
+    private Button ImageCapture;
+
     /**
      * Initializes the controller class.
      */
@@ -66,18 +88,25 @@ public class Student_infoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         Btn_Update.setDisable(update);
         NFC_textbox.setDisable(true);
+        imageView.setFitWidth(280);
+        imageView.setFitHeight(300);
+
     }
 
     @FXML
-    private void SaveData(ActionEvent event) {
-        save_Student_info();
+    private void SaveData(ActionEvent event) throws FileNotFoundException {
+        try {
+            save_Student_info();
+        } catch (IOException ex) {
+            Logger.getLogger(Student_infoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void update_disable() {
 
     }
 
-    void save_Student_info() {
+    void save_Student_info() throws FileNotFoundException, IOException {
 
         try {
             DBConnection.init();
@@ -94,7 +123,9 @@ public class Student_infoController implements Initializable {
             //String Time = time.format(cal.getTime());
             // SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/d");
             String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
+            File file = new File(System.getProperty("user.dir") + "\\image.png");
 
+            FileInputStream inputStream = new FileInputStream(file);
             ps = c.prepareStatement("SELECT count(Student_ID) FROM dcaa_pos.student_info where Student_ID='" + Student_ID.getText() + "'");
             rs = ps.executeQuery();
 
@@ -116,8 +147,8 @@ public class Student_infoController implements Initializable {
 
                     } else {
 
-                        ps = c.prepareStatement("Insert into dcaa_pos.student_info (F_name, M_name, L_Name, Student_ID, createtime, userID,NFC_Card_No)values" + "('" + F_name.getText() + "','" + Middle.getText() + "','" + Last.getText() + "','" + Student_ID.getText() + "','" + timeStamp + "','test','" + NFC_textbox.getText() + "')");
-
+                        ps = c.prepareStatement("Insert into dcaa_pos.student_info (F_name, M_name, L_Name, Student_ID, createtime, userID,NFC_Card_No,image_data)values" + "('" + F_name.getText() + "','" + Middle.getText() + "','" + Last.getText() + "','" + Student_ID.getText() + "','" + timeStamp + "','test','" + NFC_textbox.getText() + "',?)");
+                        ps.setBinaryStream(1, inputStream);
                         if (!ps.execute()) {
 
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -139,8 +170,12 @@ public class Student_infoController implements Initializable {
 
                 }
             } else {
-                ps = c.prepareStatement("Update dcaa_pos.student_info Set F_name='" + F_name.getText() + "', M_name='" + Middle.getText() + "', L_Name='" + Last.getText() + "', Student_ID='" + Student_ID.getText() + "', userID='test', NFC_Card_No='" + NFC_textbox.getText() + "' where Student_ID='" + Student_ID.getText() + "' ");
-                //rs = ps.executeQuery();
+                FileInputStream fileInputStream = new FileInputStream(System.getProperty("user.dir") + "\\image.png");
+
+                ps = c.prepareStatement("Update dcaa_pos.student_info Set F_name='" + F_name.getText() + "', M_name='" + Middle.getText() + "', L_Name='" + Last.getText() + "', Student_ID='" + Student_ID.getText() + "', userID='test', NFC_Card_No='" + NFC_textbox.getText() + "',image_data=? where Student_ID='" + Student_ID.getText() + "' ");
+                //rs = ps.executeQuery();aasd
+                ps.setBinaryStream(1, fileInputStream, fileInputStream.available());
+
                 if (!ps.execute()) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Student Information Update");
@@ -256,7 +291,7 @@ public class Student_infoController implements Initializable {
     }
     Student_CreditController student_CreditController;
 
-    void update_Student(String Id, String F_name, String M_name, String L_name, String NFC, Student_CreditController a) {
+    void update_Student(String Id, String F_name, String M_name, String L_name, String NFC, Student_CreditController a) throws SQLException, IOException {
         this.F_name.setText(F_name);
         Student_ID.setText(Id);
         Middle.setText(M_name);
@@ -275,8 +310,118 @@ public class Student_infoController implements Initializable {
         Last.setText("");
         NFC_textbox.setText("");
         Student_ID.requestFocus();
+        imageView.setImage(null);
         //update = false;
 
+    }
+
+    void Load_image_data(String id) throws IOException {
+        try {
+            DBConnection.ReadIPaddress();
+            DBConnection.init();
+            PreparedStatement ps;
+            ResultSet rs;
+            Connection c = DBConnection.getConnection();
+            ps = c.prepareStatement("SELECT image_data FROM dcaa_pos.student_info where Student_ID='" + id + "'");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                Blob blob = rs.getBlob("image_data");
+                InputStream inputStream;
+                Image image;
+                if (blob != null) {
+                    inputStream = blob.getBinaryStream();
+
+                    image = new Image(inputStream);
+                    imageView.setImage(image);
+                } else {
+                    File file = new File(System.getProperty("user.dir") + "\\no-avatar.png");
+
+                    inputStream = new FileInputStream(file);
+                    image = new Image(inputStream);  // Replace with the actual path to your .png file
+
+                    imageView.setImage(image);
+
+                }
+
+            }
+
+            //System.out.println(ps.execute());
+        } catch (SQLException ex) {
+            Logger.getLogger(Student_infoController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    void Set_captured_Image() throws FileNotFoundException {
+        File file = new File(System.getProperty("user.dir") + "\\image.png");
+
+        inputStream = new FileInputStream(file);
+        Image image = new Image(inputStream);  // Replace with the actual path to your .png file
+
+        imageView.setImage(image);
+
+    }
+
+    FileInputStream inputStream;
+
+    @FXML
+    private void SelectFile(ActionEvent event) throws FileNotFoundException {
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        fileChooser.getExtensionFilters().addAll(
+                new ExtensionFilter("Image Files", "*.png", "*.jpg"),
+                new ExtensionFilter("All Files", "*.*")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog(Btn_Update.getScene().getWindow());
+        if (selectedFile != null) {
+            File file = new File(selectedFile.getAbsolutePath());
+
+            inputStream = new FileInputStream(file);
+            Image image = new Image(inputStream);  // Replace with the actual path to your .png file
+
+            imageView.setImage(image);
+        }
+    }
+
+    @FXML
+    private void ImageCapture_(ActionEvent event) throws IOException {
+        WebcamCaptureGUI1 captureGUI1 = null;
+        if (captureGUI1 == null) {
+            captureGUI1 = new WebcamCaptureGUI1();
+            captureGUI1.initialize();
+            captureGUI1.student_infoController = this;
+        } else {
+            captureGUI1 = null;
+        }
+
+    }
+
+    private void saveImageToDatabase(String IdString) throws SQLException {
+        try {
+            // Implement database connectivity and insertion logic here
+            // Use JDBC to connect to your MySQL database and store the image data
+            // Make sure to handle exceptions and close the database connection properly
+
+            DBConnection.ReadIPaddress();
+            DBConnection.init();
+            PreparedStatement ps;
+            ResultSet rs;
+            Connection c = DBConnection.getConnection();
+
+            FileInputStream fileInputStream = new FileInputStream(System.getProperty("user.dir") + "\\image.png");
+
+            ps = c.prepareStatement("Update student_info set image_data=?  where Student_ID=?");
+            ps.setBinaryStream(1, fileInputStream, fileInputStream.available());
+            ps.setString(2, IdString);
+
+            System.out.println(ps.execute());
+
+        } catch (IOException ex) {
+
+        }
     }
 
 }
