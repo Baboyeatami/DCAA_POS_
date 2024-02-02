@@ -212,6 +212,8 @@ public class Student_infoController implements Initializable {
 
                     ps = c.prepareStatement("SET SQL_SAFE_UPDATES = 1;");
                     ps.execute();
+                    ps.close();
+                    rs.close();
 
                 } catch (SQLException e) {
                     e.printStackTrace();
