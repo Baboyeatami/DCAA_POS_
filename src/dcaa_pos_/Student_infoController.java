@@ -4,6 +4,7 @@
  */
 package dcaa_pos_;
 
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,12 +18,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -173,7 +177,7 @@ public class Student_infoController implements Initializable {
                 FileInputStream fileInputStream = new FileInputStream(System.getProperty("user.dir") + "\\image.png");
 
                 ps = c.prepareStatement("Update dcaa_pos.student_info Set F_name='" + F_name.getText() + "', M_name='" + Middle.getText() + "', L_Name='" + Last.getText() + "', Student_ID='" + Student_ID.getText() + "', userID='test', NFC_Card_No='" + NFC_textbox.getText() + "',image_data=? where Student_ID='" + Student_ID.getText() + "' ");
-                //rs = ps.executeQuery();aasd
+
                 ps.setBinaryStream(1, fileInputStream, fileInputStream.available());
 
                 if (!ps.execute()) {
@@ -185,15 +189,40 @@ public class Student_infoController implements Initializable {
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.isPresent() && result.get() == ButtonType.OK) {
                         System.out.println("clear");
-                        Clear();
+
                         student_CreditController.loaddata();
                     }
 
                 }
+
+                try {
+                    ps = c.prepareStatement("SET SQL_SAFE_UPDATES = 0;");
+                    ps.execute();
+
+                    ps = c.prepareStatement("Update dcaa_pos.credit_history Set NFC_Card_No=? where StudentID=?");
+                    ps.setString(1, NFC_textbox.getText());
+                    ps.setString(2, Student_ID.getText());
+                    int rowsUpdated = ps.executeUpdate();
+
+                    if (rowsUpdated > 0) {
+                        System.out.println("Update successful. " + rowsUpdated + " rows updated.");
+                    } else {
+                        System.out.println("Update not successful. No rows matched the condition.");
+                    }
+
+                    ps = c.prepareStatement("SET SQL_SAFE_UPDATES = 1;");
+                    ps.execute();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
             }
 
+            Clear();
+
         } catch (SQLException ex) {
-            System.out.println(ex);
+            ex.printStackTrace();
         }
 
     }
@@ -381,6 +410,16 @@ public class Student_infoController implements Initializable {
 
             inputStream = new FileInputStream(file);
             Image image = new Image(inputStream);  // Replace with the actual path to your .png file
+
+            // Convert the Image to a BufferedImage
+            BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
+
+            try {
+                // Save the BufferedImage to a file
+                ImageIO.write(bImage, "png", new File(System.getProperty("user.dir") + "\\image.png"));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
             imageView.setImage(image);
         }

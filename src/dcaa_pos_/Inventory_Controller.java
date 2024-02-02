@@ -256,7 +256,7 @@ public class Inventory_Controller implements Initializable {
             Parent root1 = loader.load();
             Update_itemListController = loader.getController();
             Update_itemListController.setInventory_(this);
-            Update_itemListController.set_Update_data(model.ID, model.Item_name, model.Description, model.Price, model.ItemType, true);
+            Update_itemListController.set_Update_data(model.ID, model.Item_name, model.Description, model.Price, model.ItemType, model.Cost, true);
 
             Stage stage = new Stage();
             stage.initModality(Modality.WINDOW_MODAL);

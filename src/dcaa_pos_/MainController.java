@@ -319,4 +319,13 @@ public class MainController implements Initializable {
         close.close();
     }
 
+    void set_Manager(String userId) {
+        this.UserId = UserId;
+        System.out.println(UserId + " setup User ID");
+        User_Accounts.setDisable(true);
+        Student.setDisable(true);
+        StudentCreit.setDisable(true);
+
+    }
+
 }

@@ -36,6 +36,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
@@ -46,6 +47,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -287,6 +289,10 @@ public class POS_MainController implements Initializable {
     private ContextMenu yyyyy;
     @FXML
     private ImageView Imageview;
+    @FXML
+    private Label LabelName;
+    @FXML
+    private MenuItem Overide_;
 
     public void setUserID(String UserID) {
         this.UserID = UserID;
@@ -467,42 +473,73 @@ public class POS_MainController implements Initializable {
         calculate_selected();
     }
 
+    boolean Manager_overide = false;
+
     void calculate_selected() {
+        try {
 
-        Total = 0;
-        No_Items = 0;
+            Total = 0;
+            No_Items = 0;
 
-        if (Quantity.getText().equals("0") || Quantity.getText().equals("")) {
-            Main_Pane.requestFocus();
-            Mode_label.setText("Mode: Select Item to continue..");
+            if (Quantity.getText().equals("0") || Quantity.getText().equals("")) {
+                Main_Pane.requestFocus();
+                Mode_label.setText("Mode: Select Item to continue..");
 
-        } else {
+            } else {
 
-            System.out.println("trasaction Calculation");
-            DecimalFormat d = new DecimalFormat(("#,###.00"));
+                String input = Quantity.getText();
 
-            Selected_Item.add(new Selected_Item(Button_List.get(Item_index).getID(), Button_List.get(Item_index).getProductName(), Integer.parseInt(Quantity.getText()), Button_List.get(Item_index).Price));
-            System.out.println(Button_List.get(Item_index).getItemTypeID());
-            tableData.clear();
-            for (int i = 0; i < Selected_Item.size(); i++) {
-                tableData.add(new Selected_Item(Selected_Item.get(i).getItemID(), Selected_Item.get(i).getProductId(), Selected_Item.get(i).getQuantity(), Selected_Item.get(i).getPrice(), Selected_Item.get(i).getSub_total()));
-                Total = Total + Selected_Item.get(i).GetSubtotal();
-                No_Items = No_Items + (int) (Selected_Item.get(i).getQuantity());
-                System.out.println(Selected_Item.get(i).getItemID());
-                System.out.println(No_Items + "Items ..no.");
+                if (input.matches("\\d+(\\.\\d+)?")) {
+
+                    System.out.println("trasaction Calculation Manager Overide :" + Manager_overide);
+                    DecimalFormat d = new DecimalFormat(("#,###.00"));
+
+                    if (Manager_overide) {
+                        Selected_Item.add(new Selected_Item(Button_List.get(Item_index).getID(), Button_List.get(Item_index).getProductName(), Double.parseDouble(input), Button_List.get(Item_index).Price));
+
+                    } else {
+                        Selected_Item.add(new Selected_Item(Button_List.get(Item_index).getID(), Button_List.get(Item_index).getProductName(), Integer.parseInt(Quantity.getText()), Button_List.get(Item_index).Price));
+                    }
+
+                    //Selected_Item.add(new Selected_Item(Button_List.get(Item_index).getID(), Button_List.get(Item_index).getProductName(), Integer.parseInt(Quantity.getText()), Button_List.get(Item_index).Price));
+                    System.out.println(Button_List.get(Item_index).getItemTypeID());
+                    tableData.clear();
+                    for (int i = 0; i < Selected_Item.size(); i++) {
+                        tableData.add(new Selected_Item(Selected_Item.get(i).getItemID(), Selected_Item.get(i).getProductId(), Selected_Item.get(i).getQuantity(), Selected_Item.get(i).getPrice(), Selected_Item.get(i).getSub_total()));
+                        Total = Total + Selected_Item.get(i).GetSubtotal();
+                        No_Items = No_Items + (int) (Selected_Item.get(i).getQuantity());
+                        System.out.println(Selected_Item.get(i).getItemID());
+                        System.out.println(No_Items + "Items ..no.");
+                    }
+                    Items_Label.setText("No.of items: " + No_Items);
+                    TablePOS.setItems(tableData);
+
+                    Grand_Total.setText(String.format("%,.2f", Total));
+                    Main_Pane.requestFocus();
+                    Mode_label.setText("Mode: Select Item");
+                    Quantity.setText("");
+
+                    @SuppressWarnings("unchecked")
+                    TablePosition pos = new TablePosition(TablePOS, Selected_Item.size(), null);
+                    TablePOS.getFocusModel().focus(pos);
+                    TablePOS.requestFocus();
+                } else {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error Dialog");
+                    alert.setHeaderText(null);
+                    alert.setContentText("The input is not numerical ");
+                    alert.showAndWait();
+
+                }
             }
-            Items_Label.setText("No.of items: " + No_Items);
-            TablePOS.setItems(tableData);
+            Manager_overide = false;
 
-            Grand_Total.setText(String.format("%,.2f", Total));
-            Main_Pane.requestFocus();
-            Mode_label.setText("Mode: Select Item");
-            Quantity.setText("");
-
-            @SuppressWarnings("unchecked")
-            TablePosition pos = new TablePosition(TablePOS, Selected_Item.size(), null);
-            TablePOS.getFocusModel().focus(pos);
-            TablePOS.requestFocus();
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Quantity value invalid ");
+            alert.showAndWait();
 
         }
     }
@@ -838,6 +875,7 @@ public class POS_MainController implements Initializable {
                     credit = 0.0;
                 } else {
                     credit = Double.valueOf(rs.getString(1));
+                    //LabelName.setText(rs.getString("F_name") + " " + rs.getString("M_name") + " " + rs.getString("L_name"));
                     System.out.println("debit:" + debit);
                 }
 
@@ -860,6 +898,8 @@ public class POS_MainController implements Initializable {
             ps1.close();
             rs.close();
             rs1.close();
+
+            // inputBox();
         } catch (IOException ex) {
             Logger.getLogger(POS_MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1443,10 +1483,11 @@ public class POS_MainController implements Initializable {
             Double debit = 0.0, credit = 0.0;
             NFC_no = cardString;
 
-            ps = c.prepareStatement("SELECT Student_ID FROM dcaa_pos.student_info where NFC_Card_No='" + cardString + "'");
+            ps = c.prepareStatement("SELECT Student_ID,F_name, M_name, L_Name FROM dcaa_pos.student_info where NFC_Card_No='" + cardString + "'");
             rs = ps.executeQuery();
             if (rs.next()) {
                 StudentID = rs.getString("Student_ID");
+                LabelName.setText(rs.getString("F_name") + " " + rs.getString("M_name") + " " + rs.getString("L_name"));
             }
             rs.close();
             ps.close();
@@ -1651,4 +1692,50 @@ public class POS_MainController implements Initializable {
             Logger.getLogger(POS_MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    void inputBox() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Input Dialog");
+        dialog.setHeaderText("Enter a number:");
+
+        // Show the dialog and get the user's input
+        String input = dialog.showAndWait().orElse("");
+
+        // Check if the input is numerical
+        if (input.matches("\\d+(\\.\\d+)?")) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("The input is numerical.");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("The input is not numerical.");
+            alert.showAndWait();
+        }
+    }
+    Overide_LoginController manager_overide;
+
+    @FXML
+    private void Overide_(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dcaa_pos_/Overide_Login.fxml"));
+            Parent root1 = loader.load();
+            manager_overide = loader.getController();
+            manager_overide.main = this;
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setTitle("Manager Overide");
+            stage.setScene(new Scene(root1));
+            stage.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(POS_MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
 }

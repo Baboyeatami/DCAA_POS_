@@ -157,20 +157,23 @@ public class Sales_InvoiceController implements Initializable {
 
         Connection c = DBConnection.getConnection();
 
-        PreparedStatement ps = null, ps2;
-        ResultSet rs, rs2;
+        PreparedStatement ps = null, ps2, ps_sum = null;
+        ResultSet rs, rs2, rs_sum;
         String ItemName = "";
         String Search = "%" + search.getText() + "%";
         tableData.clear();
         try {
             if (combo.getSelectionModel().getSelectedIndex() == 0) {
                 ps = c.prepareStatement("SELECT  Item_name, quantity, price, subTotal, OR_, StudentID,date FROM dcaa_pos.invoice where StudentID like '" + Search + "'  order by date DESC");
+                ps_sum = c.prepareStatement("SELECT sum(subTotal) as total  FROM  dcaa_pos.invoice where StudentID='" + search.getText() + "'");
 
             } else if (combo.getSelectionModel().getSelectedIndex() == 1) {
                 ps = c.prepareStatement("SELECT  Item_name, quantity, price, subTotal, OR_, StudentID,date FROM dcaa_pos.invoice where OR_ like '" + Search + "'  order by date DESC");
+                ps_sum = c.prepareStatement("SELECT sum(subTotal) as total  FROM  dcaa_pos.invoice where OR_='" + search.getText() + "'");
 
             } else if (combo.getSelectionModel().getSelectedIndex() == 2) {
                 ps = c.prepareStatement("SELECT  Item_name, quantity, price, subTotal, OR_, StudentID,date FROM dcaa_pos.invoice where Item_name like '" + Search + "'  order by date DESC");
+                ps_sum = c.prepareStatement("SELECT sum(subTotal) as total  FROM  dcaa_pos.invoice where Item_name ='" + search.getText() + "'");
 
             }
 
@@ -188,8 +191,27 @@ public class Sales_InvoiceController implements Initializable {
 
             table.setItems(tableData);
 
+            rs_sum = ps_sum.executeQuery();
+
+            if (rs_sum.next()) {
+                System.out.println(rs_sum.getString("total") + "  sum");
+                double amount = 0;
+                if (rs_sum.getString(1) == null) {
+                    amount = 0;
+                } else {
+                    amount = Double.parseDouble(rs_sum.getString(1));
+                }
+
+                DecimalFormat decimalFormatter = new DecimalFormat("#,##0.00");
+                String formattedAmount = decimalFormatter.format(amount);
+
+                System.out.println("Formatted amount: " + formattedAmount);
+                subtotal.setText("Sub Total:  " + formattedAmount);
+            }
+
             c.close();
 
+            //c.close();
         } catch (SQLException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }

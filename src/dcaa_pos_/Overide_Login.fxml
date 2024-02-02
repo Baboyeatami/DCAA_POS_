@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="184.0" prefWidth="298.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="dcaa_pos_.Overide_LoginController">
+   <children>
+      <Label layoutX="24.0" layoutY="20.0" text="Manager Overide Verification">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="64.0" text="Username:">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="29.0" layoutY="105.0" prefHeight="26.0" prefWidth="85.0" text="Password:">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="username" layoutX="113.0" layoutY="58.0" prefHeight="25.0" prefWidth="167.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="password" layoutX="113.0" layoutY="99.0" onAction="#Password_Verify" prefHeight="25.0" prefWidth="167.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </PasswordField>
+      <Button fx:id="Login_ok" defaultButton="true" layoutX="114.0" layoutY="145.0" mnemonicParsing="false" onAction="#Verfication_" prefHeight="27.0" prefWidth="167.0" text="OK">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

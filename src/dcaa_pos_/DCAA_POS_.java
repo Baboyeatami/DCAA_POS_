@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -29,6 +31,7 @@ public class DCAA_POS_ extends Application {
 
         try {
             System.out.println(System.getProperty("user.dir"));
+            check_admin();
             Add_Buttons();
             check_Card_Coloum();
             check_Card_Credithistory();
@@ -71,6 +74,35 @@ public class DCAA_POS_ extends Application {
                 System.out.println("Alter table completed ");
             } else {
                 System.out.println("Remarks coloum exist: no table altered");
+            }
+
+        } catch (IOException ex) {
+            //Logger.getLogger(DCAA_BILLING.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    static void check_admin() throws SQLException {
+
+        try {
+            DBConnection.ReadIPaddress();
+            DBConnection.init();
+            PreparedStatement ps;
+            ResultSet rs;
+            Connection c = DBConnection.getConnection();
+            String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
+            ps = c.prepareStatement("SELECT COUNT(usertype)  FROM users  WHERE usertype = 'admin'; ");
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                if (rs.getInt(1) == 0) {
+                    System.out.println(rs.getInt(1));
+                    ps = c.prepareStatement("INSERT INTO users (Name, UserName, Password, usertype, createtime) VALUES ('administrator','administrator','theadministrator','Admin', '" + timeStamp + "')");
+                    ps.execute();
+                    System.out.println("admin account created");
+                } else {
+                    System.out.println("Admin account exist");
+                }
             }
 
         } catch (IOException ex) {

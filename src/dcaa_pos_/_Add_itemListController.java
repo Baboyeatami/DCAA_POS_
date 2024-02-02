@@ -56,15 +56,17 @@ public class _Add_itemListController implements Initializable {
     Inventory_Controller inventory_;
     boolean Update = false;
     String ItemID = "";
+    String costString = "";
     @FXML
     private TextField cost;
 
-    void set_Update_data(String ID, String Item_name, String Description, String price, String comboItemType, boolean Update) {
+    void set_Update_data(String ID, String Item_name, String Description, String price, String comboItemType, String Cost_String, boolean Update) {
         ItemID = ID;
         this.Item_name.setText(Item_name);
         this.Description.setText(Description);
         this.price.setText(price);
         this.comboItemType.setValue(comboItemType);
+        this.cost.setText(Cost_String);
         AddNewButton.setText("Update");
         this.Update = Update;
     }

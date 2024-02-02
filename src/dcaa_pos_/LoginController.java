@@ -85,6 +85,20 @@ public class LoginController implements Initializable {
                         Parent root1 = loader.load();
                         Main = loader.getController();
                         Main.setUserId(rs.getString("idusers"));
+                        Main.set_Manager(rs.getString("idusers"));
+                        System.out.println(Main.getUserId() + "login user id");
+
+                        Stage stage = new Stage();
+                        stage.initModality(Modality.WINDOW_MODAL);
+                        stage.initStyle(StageStyle.UNDECORATED);
+                        stage.setTitle("Main Window");
+                        stage.setScene(new Scene(root1));
+                        stage.show();
+                    } else if (rs.getString("usertype").equals("Admin")) {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/dcaa_pos_/Main.fxml"));
+                        Parent root1 = loader.load();
+                        Main = loader.getController();
+                        Main.setUserId(rs.getString("idusers"));
                         System.out.println(Main.getUserId() + "login user id");
 
                         Stage stage = new Stage();

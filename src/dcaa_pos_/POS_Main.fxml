@@ -129,6 +129,11 @@
                         <MenuItem mnemonicParsing="false" onAction="#Credit_Replenish" text="Credit Replenish " />
                     </items>
                 </Menu>
+            <Menu mnemonicParsing="false" text="Transaction Overide ">
+              <items>
+                <MenuItem fx:id="Overide_" mnemonicParsing="false" onAction="#Overide_" text="Overide" />
+              </items>
+            </Menu>
             </menus>
         </MenuBar>
         <AnchorPane layoutX="642.0" layoutY="74.0" prefHeight="622.0" prefWidth="494.0" style="-fx-background-color: #064663;" AnchorPane.bottomAnchor="46.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="74.0">
@@ -181,22 +186,22 @@
                 </Label>
             </children>
         </AnchorPane>
-        <Label layoutX="24.0" layoutY="46.0" prefHeight="55.0" prefWidth="183.0" text="Quantity">
+        <Label layoutX="24.0" layoutY="77.0" prefHeight="55.0" prefWidth="146.0" text="Quantity">
             <font>
-                <Font name="System Bold" size="38.0" />
+                <Font name="System Bold" size="32.0" />
             </font>
         </Label>
-        <TextField fx:id="Quantity" layoutX="196.0" layoutY="46.0" onAction="#Calculate_selected_item" prefHeight="69.0" prefWidth="282.0">
+        <TextField fx:id="Quantity" layoutX="174.0" layoutY="70.0" onAction="#Calculate_selected_item" prefHeight="55.0" prefWidth="282.0">
             <font>
                 <Font size="32.0" />
             </font>
         </TextField>
-        <Label layoutX="32.0" layoutY="129.0" text="Item Selection">
+        <Label layoutX="31.0" layoutY="155.0" text="Item Selection">
             <font>
                 <Font size="21.0" />
             </font>
         </Label>
-        <Label fx:id="Item_selected_label" alignment="CENTER" layoutX="196.0" layoutY="125.0" prefHeight="69.0" prefWidth="441.0" style="-fx-border-color: Black;" text="Item Selection" textAlignment="CENTER">
+        <Label fx:id="Item_selected_label" alignment="CENTER" layoutX="174.0" layoutY="143.0" prefHeight="55.0" prefWidth="441.0" style="-fx-border-color: Black;" text="Item Selection" textAlignment="CENTER">
             <font>
                 <Font name="System Bold" size="27.0" />
             </font>
@@ -211,7 +216,7 @@
                 <Font name="System Bold" size="15.0" />
             </font>
         </TextField>
-        <Label fx:id="OR_Number" layoutX="202.0" layoutY="20.0" prefHeight="21.0" prefWidth="282.0" text="OR Number">
+        <Label fx:id="OR_Number" layoutX="174.0" layoutY="36.0" prefHeight="15.0" prefWidth="282.0" text="OR Number">
             <font>
                 <Font name="System Bold" size="15.0" />
             </font>
@@ -629,6 +634,7 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <ImageView fx:id="Imageview" fitHeight="108.0" fitWidth="140.0" layoutX="490.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="Imageview" fitHeight="108.0" fitWidth="140.0" layoutX="475.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="LabelName" layoutX="475.0" layoutY="123.0" prefHeight="17.0" prefWidth="146.0" text="Student Name" textAlignment="CENTER" textFill="#2c9e09" />
     </children>
 </AnchorPane>
