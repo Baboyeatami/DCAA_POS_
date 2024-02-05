@@ -635,6 +635,6 @@
          </font>
       </Button>
       <ImageView fx:id="Imageview" fitHeight="108.0" fitWidth="140.0" layoutX="475.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="LabelName" layoutX="475.0" layoutY="123.0" prefHeight="17.0" prefWidth="146.0" text="Student Name" textAlignment="CENTER" textFill="#2c9e09" />
+      <Label fx:id="LabelName" layoutX="475.0" layoutY="123.0" prefHeight="17.0" prefWidth="146.0" textAlignment="CENTER" textFill="#2c9e09" />
     </children>
 </AnchorPane>

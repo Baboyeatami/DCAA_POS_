@@ -175,7 +175,7 @@ public class Student_infoController implements Initializable {
                 }
             } else {
                 FileInputStream fileInputStream = new FileInputStream(System.getProperty("user.dir") + "\\image.png");
-
+                System.out.println("wow");
                 ps = c.prepareStatement("Update dcaa_pos.student_info Set F_name='" + F_name.getText() + "', M_name='" + Middle.getText() + "', L_Name='" + Last.getText() + "', Student_ID='" + Student_ID.getText() + "', userID='test', NFC_Card_No='" + NFC_textbox.getText() + "',image_data=? where Student_ID='" + Student_ID.getText() + "' ");
 
                 ps.setBinaryStream(1, fileInputStream, fileInputStream.available());

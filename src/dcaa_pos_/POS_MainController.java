@@ -1666,7 +1666,7 @@ public class POS_MainController implements Initializable {
             PreparedStatement ps = null;
             ResultSet rs;
             Connection c = DBConnection.getConnection();
-            ps = c.prepareStatement("SELECT image_data FROM dcaa_pos.student_info where Student_ID='" + id + "'");
+            ps = c.prepareStatement("SELECT image_data, F_name, M_name, L_Name FROM dcaa_pos.student_info where Student_ID='" + id + "'");
             rs = ps.executeQuery();
             if (rs.next()) {
                 Blob blob = rs.getBlob("image_data");
@@ -1676,6 +1676,7 @@ public class POS_MainController implements Initializable {
                     inputStream = blob.getBinaryStream();
 
                     image = new Image(inputStream);
+                    LabelName.setText(rs.getString("F_name") + " " + rs.getString("M_name") + " " + rs.getString("L_name"));
                     Imageview.setImage(image);
                 } else {
                     File file = new File(System.getProperty("user.dir") + "\\no-avatar.png");
