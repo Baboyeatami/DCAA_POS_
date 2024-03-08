@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CreditReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e9602ab-5ac6-4400-a9f8-74c32c7cbbe6">
+    <property name="ireport.zoom" value="2.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <parameter name="parameter1" class="java.lang.String"/>
+    <parameter name="parameter2" class="java.lang.String"/>
+    <queryString>
+		<![CDATA[SELECT * FROM dcaa_pos.credit_history;]]>
+    </queryString>
+    <field name="idCredit_history" class="java.lang.Integer">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="StudentID" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="Credit" class="java.lang.Double">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="createtime" class="java.sql.Timestamp">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="userID" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="Transaction_type" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="OR_" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="NFC_Card_No" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <variable name="Credit_1" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[$F{Credit}]]></variableExpression>
+    </variable>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="21" splitType="Stretch">
+            <staticText>
+                <reportElement x="200" y="0" width="180" height="20" uuid="545b8e99-2742-443c-a32c-e9f0228162d9"/>
+                <textElement>
+                    <font size="14"/>
+                </textElement>
+                <text><![CDATA[DCAA POS Credit Report]]></text>
+            </staticText>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="41" splitType="Stretch">
+            <staticText>
+                <reportElement x="0" y="1" width="24" height="19" uuid="c247caea-5049-4a0f-9082-c635a41d15c1"/>
+                <textElement>
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Date:]]></text>
+            </staticText>
+            <textField pattern="MMMMM dd, yyyy">
+                <reportElement x="24" y="1" width="88" height="19" uuid="9ac3f419-cd67-4d1a-80e4-a1e800cc63ef"/>
+                <textElement>
+                    <font size="12" isItalic="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{parameter1}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="0" y="20" width="24" height="19" uuid="13cb426f-e08a-44cd-beac-20e87ea189b7"/>
+                <textElement>
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[To]]></text>
+            </staticText>
+            <textField pattern="MMMMM dd, yyyy">
+                <reportElement x="21" y="20" width="91" height="20" uuid="18d30177-884d-4537-9440-932b0388dd31"/>
+                <textElement>
+                    <font size="12" isItalic="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{parameter2}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageHeader>
+    <columnHeader>
+        <band height="22" splitType="Stretch">
+            <staticText>
+                <reportElement x="41" y="0" width="100" height="20" uuid="5102e438-fae5-4894-9f58-3fd7dcc49cd9"/>
+                <textElement textAlignment="Center"/>
+                <text><![CDATA[OR Number]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="152" y="0" width="100" height="20" uuid="0f067a3a-5ab6-475a-8a71-ed8639d198ad"/>
+                <textElement textAlignment="Center"/>
+                <text><![CDATA[Student Id]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="252" y="0" width="100" height="20" uuid="5d5483de-d115-45d6-bf00-5e2ffbb0b12e"/>
+                <textElement textAlignment="Center"/>
+                <text><![CDATA[Transaction type]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="394" y="0" width="100" height="20" uuid="638b3f76-605b-42d8-9d8a-8775dc039a60"/>
+                <textElement textAlignment="Center"/>
+                <text><![CDATA[Amount]]></text>
+            </staticText>
+            <line>
+                <reportElement x="0" y="20" width="554" height="1" uuid="369ddca1-1a61-4c94-9c31-66c095c179de"/>
+            </line>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="16" splitType="Stretch">
+            <textField>
+                <reportElement x="41" y="0" width="111" height="14" uuid="82cd84d0-57d1-4ad1-b8ca-a69b0128f2ac"/>
+                <textElement textAlignment="Center"/>
+                <textFieldExpression><![CDATA[$F{OR_}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="152" y="0" width="100" height="14" uuid="85f3cbe9-ba3b-4f66-8027-a2b0063411fd"/>
+                <textElement textAlignment="Center"/>
+                <textFieldExpression><![CDATA[$F{StudentID}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="246" y="0" width="121" height="14" uuid="a1cea43f-8e99-41a8-9ff1-f476651a2109"/>
+                <textElement textAlignment="Center"/>
+                <textFieldExpression><![CDATA[$F{Transaction_type}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="394" y="0" width="100" height="14" uuid="9e437840-365e-454b-8a74-71e2f08ccb6c"/>
+                <textElement textAlignment="Center"/>
+                <textFieldExpression><![CDATA[$F{Credit}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="0" width="41" height="16" uuid="e33690e7-3861-42eb-9cde-6b7157042801"/>
+                <textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <summary>
+        <band height="20" splitType="Stretch">
+            <textField pattern="¤ #,##0.00">
+                <reportElement x="394" y="0" width="160" height="20" uuid="a91b6735-450d-4863-8073-30b291d9f5cb"/>
+                <textFieldExpression><![CDATA[$V{Credit_1}]]></textFieldExpression>
+            </textField>
+            <line>
+                <reportElement x="0" y="0" width="555" height="1" uuid="996b8147-e18c-4fc0-a57b-a526ed2775a9"/>
+            </line>
+            <staticText>
+                <reportElement x="367" y="2" width="27" height="18" uuid="6d5cf5b5-b9bb-4580-b37c-54ff9e31eece"/>
+                <text><![CDATA[Total:]]></text>
+            </staticText>
+        </band>
+    </summary>
+</jasperReport>

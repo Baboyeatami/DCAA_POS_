@@ -136,14 +136,14 @@
             </Menu>
             </menus>
         </MenuBar>
-        <AnchorPane layoutX="642.0" layoutY="74.0" prefHeight="622.0" prefWidth="494.0" style="-fx-background-color: #064663;" AnchorPane.bottomAnchor="46.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="74.0">
+        <AnchorPane layoutX="642.0" layoutY="74.0" prefHeight="622.0" prefWidth="494.0" style="-fx-background-color: #064663;" AnchorPane.leftAnchor="642.0" AnchorPane.rightAnchor="12.0">
             <children>
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="50.0" prefWidth="198.0" text="Grand Total" textAlignment="CENTER" textFill="#f8f7f7">
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="50.0" prefWidth="198.0" text="Grand Total" textAlignment="CENTER" textFill="#f8f7f7" AnchorPane.leftAnchor="14.0">
                     <font>
                         <Font name="System Bold" size="34.0" />
                     </font>
                 </Label>
-                <TableView fx:id="TablePOS" layoutY="112.0" prefHeight="380.0" prefWidth="494.0" stylesheets="@POSTableCSS.css">
+                <TableView fx:id="TablePOS" layoutY="112.0" prefHeight="380.0" prefWidth="494.0" stylesheets="@POSTableCSS.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <columns>
                         <TableColumn fx:id="Item_id" prefWidth="97.0" text="Item ID" />
                         <TableColumn fx:id="Item_name" prefWidth="97.0" text="Product" />
@@ -159,481 +159,501 @@
                   </ContextMenu>
                </contextMenu>
                 </TableView>
-                <Label fx:id="Grand_Total" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="64.0" prefHeight="46.0" prefWidth="479.0" text="Grand Total" textAlignment="CENTER" textFill="#64ee62">
+                <Label fx:id="Grand_Total" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="64.0" prefHeight="46.0" prefWidth="479.0" text="Grand Total" textAlignment="CENTER" textFill="#64ee62" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="1.0">
                     <font>
                         <Font name="System Bold" size="34.0" />
                     </font>
                 </Label>
-                <TextField fx:id="CASH" layoutX="92.0" layoutY="500.0" onAction="#Cash_" prefHeight="31.0" prefWidth="394.0">
+                <TextField fx:id="CASH" layoutX="92.0" layoutY="500.0" onAction="#Cash_" prefHeight="31.0" prefWidth="394.0" AnchorPane.leftAnchor="92.0" AnchorPane.rightAnchor="8.0">
                     <font>
                         <Font size="30.0" />
                     </font>
                 </TextField>
-                <Label fx:id="Grand_Total1" layoutX="8.0" layoutY="508.0" prefHeight="50.0" prefWidth="78.0" text="Cash" textFill="#64ee62">
+                <Label fx:id="Grand_Total1" layoutX="8.0" layoutY="508.0" prefHeight="50.0" prefWidth="78.0" text="Cash" textFill="#64ee62" AnchorPane.leftAnchor="8.0">
                     <font>
                         <Font name="System Bold" size="34.0" />
                     </font>
                 </Label>
-                <Label fx:id="Change" layoutX="8.0" layoutY="565.0" prefHeight="32.0" prefWidth="479.0" text="Change :" textFill="#f8f7f7">
+                <Label fx:id="Change" layoutX="8.0" layoutY="565.0" prefHeight="32.0" prefWidth="479.0" text="Change :" textFill="#f8f7f7" AnchorPane.leftAnchor="8.0">
                     <font>
                         <Font name="System Bold" size="34.0" />
                     </font>
                 </Label>
-                <Label fx:id="Items_Label" alignment="TOP_CENTER" layoutX="224.0" layoutY="21.0" prefHeight="36.0" prefWidth="267.0" text="Label" textFill="#f5f0f0">
+                <Label fx:id="Items_Label" alignment="TOP_CENTER" layoutX="224.0" layoutY="21.0" prefHeight="36.0" prefWidth="267.0" text="Label" textFill="#f5f0f0" AnchorPane.leftAnchor="224.0" AnchorPane.rightAnchor="3.0">
                     <font>
                         <Font name="System Bold" size="25.0" />
                     </font>
                 </Label>
             </children>
         </AnchorPane>
-        <Label layoutX="24.0" layoutY="77.0" prefHeight="55.0" prefWidth="146.0" text="Quantity">
-            <font>
-                <Font name="System Bold" size="32.0" />
-            </font>
-        </Label>
-        <TextField fx:id="Quantity" layoutX="174.0" layoutY="70.0" onAction="#Calculate_selected_item" prefHeight="55.0" prefWidth="282.0">
-            <font>
-                <Font size="32.0" />
-            </font>
-        </TextField>
-        <Label layoutX="31.0" layoutY="155.0" text="Item Selection">
-            <font>
-                <Font size="21.0" />
-            </font>
-        </Label>
-        <Label fx:id="Item_selected_label" alignment="CENTER" layoutX="174.0" layoutY="143.0" prefHeight="55.0" prefWidth="441.0" style="-fx-border-color: Black;" text="Item Selection" textAlignment="CENTER">
-            <font>
-                <Font name="System Bold" size="27.0" />
-            </font>
-        </Label>
-        <Label layoutX="902.0" layoutY="10.0" prefHeight="21.0" prefWidth="90.0" text="Student ID:">
-            <font>
-                <Font name="System Bold" size="15.0" />
-            </font>
-        </Label>
-        <TextField fx:id="Student_Id" layoutX="1002.0" layoutY="5.0" onAction="#Student_ID_Action" onTouchPressed="#Touch_Press" prefHeight="31.0" prefWidth="140.0">
-            <font>
-                <Font name="System Bold" size="15.0" />
-            </font>
-        </TextField>
-        <Label fx:id="OR_Number" layoutX="174.0" layoutY="36.0" prefHeight="15.0" prefWidth="282.0" text="OR Number">
-            <font>
-                <Font name="System Bold" size="15.0" />
-            </font>
-        </Label>
-        <Label fx:id="Mode_label" layoutX="32.0" layoutY="704.0" prefHeight="31.0" prefWidth="605.0" text="Mode:" textFill="#f51616">
-            <font>
-                <Font name="System Bold" size="22.0" />
-            </font>
-        </Label>
-        <Label fx:id="label_sales" layoutX="642.0" layoutY="704.0" prefHeight="25.0" prefWidth="494.0" text="Sales Invoice:">
-            <font>
-                <Font name="System Bold" size="20.0" />
-            </font>
-        </Label>
-        <TabPane layoutX="25.0" layoutY="207.0" prefHeight="497.0" prefWidth="605.0" stylesheets="@Tab_pane.css" tabClosingPolicy="UNAVAILABLE">
-            <tabs>
-                <Tab text="Viands">
-                    <content>
-                        <GridPane prefHeight="497.0" prefWidth="258.0" styleClass="grid" stylesheets="@Tab_pane.css">
-                            <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            </rowConstraints>
-                            <children>
-                                <Button fx:id="Button_8" mnemonicParsing="false" onAction="#item_9" prefHeight="99.0" prefWidth="206.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_7" mnemonicParsing="false" onAction="#item_8" prefHeight="99.0" prefWidth="204.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button mnemonicParsing="false" text="Button" />
-                                <Button fx:id="Button_0" mnemonicParsing="false" onAction="#item_1" prefHeight="106.0" prefWidth="202.0" text="Button">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_3" mnemonicParsing="false" onAction="#item_4" prefHeight="97.0" prefWidth="206.0" text="Button" GridPane.rowIndex="1">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_1" mnemonicParsing="false" onAction="#item_2" prefHeight="100.0" prefWidth="204.0" text="Button" GridPane.columnIndex="1">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_2" mnemonicParsing="false" onAction="#item_3" prefHeight="100.0" prefWidth="206.0" text="Button" GridPane.columnIndex="2">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_4" mnemonicParsing="false" onAction="#item_5" prefHeight="100.0" prefWidth="205.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_5" mnemonicParsing="false" onAction="#item_6" prefHeight="97.0" prefWidth="205.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_6" mnemonicParsing="false" onAction="#item_7" prefHeight="107.0" prefWidth="202.0" text="Button" GridPane.rowIndex="2">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_9" mnemonicParsing="false" onAction="#item_10" prefHeight="105.0" prefWidth="202.0" text="Button" GridPane.rowIndex="3">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_10" mnemonicParsing="false" onAction="#item_11" prefHeight="105.0" prefWidth="202.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_11" mnemonicParsing="false" onAction="#item_12" prefHeight="109.0" prefWidth="201.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_12" mnemonicParsing="false" onAction="#item_13" prefHeight="96.0" prefWidth="202.0" text="Button" GridPane.rowIndex="4">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_13" mnemonicParsing="false" onAction="#Item_14" prefHeight="100.0" prefWidth="202.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_14" mnemonicParsing="false" onAction="#Item_15" prefHeight="99.0" prefWidth="218.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="4">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                            </children>
-                        </GridPane>
-                    </content>
-                </Tab>
-                <Tab text="Drinks">
-                    <content>
-                        <GridPane prefHeight="497.0" prefWidth="258.0" styleClass="grid" stylesheets="@Tab_pane.css">
-                            <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            </rowConstraints>
-                            <children>
-                                <Button fx:id="Button_23" mnemonicParsing="false" onAction="#item_24" prefHeight="99.0" prefWidth="206.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_22" mnemonicParsing="false" onAction="#item_23" prefHeight="99.0" prefWidth="204.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button mnemonicParsing="false" text="Button" />
-                                <Button fx:id="Button_15" mnemonicParsing="false" onAction="#item_16" prefHeight="106.0" prefWidth="202.0" text="Button">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_18" mnemonicParsing="false" onAction="#item_19" prefHeight="97.0" prefWidth="206.0" text="Button" GridPane.rowIndex="1">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_16" mnemonicParsing="false" onAction="#item_17" prefHeight="100.0" prefWidth="204.0" text="Button" GridPane.columnIndex="1">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_17" mnemonicParsing="false" onAction="#item_18" prefHeight="100.0" prefWidth="206.0" text="Button" GridPane.columnIndex="2">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_19" mnemonicParsing="false" onAction="#item_20" prefHeight="100.0" prefWidth="205.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_20" mnemonicParsing="false" onAction="#item_21" prefHeight="97.0" prefWidth="205.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_21" mnemonicParsing="false" onAction="#item_22" prefHeight="107.0" prefWidth="202.0" text="Button" GridPane.rowIndex="2">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_24" mnemonicParsing="false" onAction="#item_25" prefHeight="105.0" prefWidth="202.0" text="Button" GridPane.rowIndex="3">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_25" mnemonicParsing="false" onAction="#item_26" prefHeight="105.0" prefWidth="202.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_26" mnemonicParsing="false" onAction="#item_27" prefHeight="109.0" prefWidth="201.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_27" mnemonicParsing="false" onAction="#item_28" prefHeight="96.0" prefWidth="202.0" text="Button" GridPane.rowIndex="4">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_28" mnemonicParsing="false" onAction="#Item_29" prefHeight="100.0" prefWidth="202.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_29" mnemonicParsing="false" onAction="#Item_30" prefHeight="99.0" prefWidth="218.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="4">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                            </children>
-                        </GridPane>
-                    </content>
-                </Tab>
-                <Tab text="Snacks">
-                    <content>
-                        <GridPane prefHeight="497.0" prefWidth="258.0" styleClass="grid" stylesheets="@Tab_pane.css">
-                            <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            </rowConstraints>
-                            <children>
-                                <Button fx:id="Button_38" mnemonicParsing="false" onAction="#item_39" prefHeight="99.0" prefWidth="206.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_37" mnemonicParsing="false" onAction="#item_38" prefHeight="99.0" prefWidth="204.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button mnemonicParsing="false" text="Button" />
-                                <Button fx:id="Button_30" mnemonicParsing="false" onAction="#item_31" prefHeight="106.0" prefWidth="202.0" text="Button">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_33" mnemonicParsing="false" onAction="#item_34" prefHeight="97.0" prefWidth="206.0" text="Button" GridPane.rowIndex="1">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_31" mnemonicParsing="false" onAction="#item_32" prefHeight="100.0" prefWidth="204.0" text="Button" GridPane.columnIndex="1">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_32" mnemonicParsing="false" onAction="#item_33" prefHeight="100.0" prefWidth="206.0" text="Button" GridPane.columnIndex="2">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_34" mnemonicParsing="false" onAction="#item_35" prefHeight="100.0" prefWidth="205.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_35" mnemonicParsing="false" onAction="#item_36" prefHeight="97.0" prefWidth="205.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_36" mnemonicParsing="false" onAction="#item_37" prefHeight="107.0" prefWidth="202.0" text="Button" GridPane.rowIndex="2">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_39" mnemonicParsing="false" onAction="#item_40" prefHeight="105.0" prefWidth="202.0" text="Button" GridPane.rowIndex="3">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_40" mnemonicParsing="false" onAction="#item_41" prefHeight="105.0" prefWidth="202.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_41" mnemonicParsing="false" onAction="#item_42" prefHeight="109.0" prefWidth="201.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_42" mnemonicParsing="false" onAction="#item_43" prefHeight="96.0" prefWidth="202.0" text="Button" GridPane.rowIndex="4">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_43" mnemonicParsing="false" onAction="#Item_44" prefHeight="100.0" prefWidth="202.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_44" mnemonicParsing="false" onAction="#Item_45" prefHeight="99.0" prefWidth="218.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="4">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                            </children>
-                        </GridPane>
-                    </content>
-                </Tab>
-                <Tab text="Others">
-                    <content>
-                        <GridPane prefHeight="497.0" prefWidth="258.0" styleClass="grid" stylesheets="@Tab_pane.css">
-                            <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            </rowConstraints>
-                            <children>
-                                <Button fx:id="Button_53" mnemonicParsing="false" onAction="#item_54" prefHeight="99.0" prefWidth="206.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_52" mnemonicParsing="false" onAction="#item_53" prefHeight="99.0" prefWidth="204.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button mnemonicParsing="false" text="Button" />
-                                <Button fx:id="Button_45" mnemonicParsing="false" onAction="#item_46" prefHeight="106.0" prefWidth="202.0" text="Button">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_48" mnemonicParsing="false" onAction="#item_49" prefHeight="97.0" prefWidth="206.0" text="Button" GridPane.rowIndex="1">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_46" mnemonicParsing="false" onAction="#item_47" prefHeight="100.0" prefWidth="204.0" text="Button" GridPane.columnIndex="1">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_47" mnemonicParsing="false" onAction="#item_48" prefHeight="100.0" prefWidth="206.0" text="Button" GridPane.columnIndex="2">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_49" mnemonicParsing="false" onAction="#Item_50" prefHeight="100.0" prefWidth="205.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_50" mnemonicParsing="false" onAction="#item_51" prefHeight="97.0" prefWidth="205.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_51" mnemonicParsing="false" onAction="#item_52" prefHeight="107.0" prefWidth="202.0" text="Button" GridPane.rowIndex="2">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_54" mnemonicParsing="false" onAction="#item_55" prefHeight="105.0" prefWidth="202.0" text="Button" GridPane.rowIndex="3">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_55" mnemonicParsing="false" onAction="#item_56" prefHeight="105.0" prefWidth="202.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_56" mnemonicParsing="false" onAction="#item_57" prefHeight="109.0" prefWidth="201.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_57" mnemonicParsing="false" onAction="#item_58" prefHeight="96.0" prefWidth="202.0" text="Button" GridPane.rowIndex="4">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_58" mnemonicParsing="false" onAction="#Item_59" prefHeight="100.0" prefWidth="202.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="Button_59" mnemonicParsing="false" onAction="#Item_60" prefHeight="99.0" prefWidth="218.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="4">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                            </children>
-                        </GridPane>
-                    </content>
-                </Tab>
-            </tabs>
-        </TabPane>
-        <Label fx:id="StudentCredit" layoutX="642.0" layoutY="10.0" prefHeight="21.0" prefWidth="258.0" text="Student Credit:">
-            <font>
-                <Font size="15.0" />
-            </font>
-        </Label>
-        <Button fx:id="Scan_NFC" layoutX="643.0" layoutY="38.0" mnemonicParsing="false" onAction="#Scan_NFC" prefHeight="32.0" prefWidth="183.0" text="Scan Card">
-            <font>
-                <Font name="System Bold" size="15.0" />
-            </font>
-        </Button>
-      <Button fx:id="PayCard_" layoutX="903.0" layoutY="38.0" mnemonicParsing="false" onAction="#PayCard_" prefHeight="32.0" prefWidth="239.0" text="Pay with Credit">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Button>
+      <AnchorPane layoutX="24.0" layoutY="36.0" AnchorPane.leftAnchor="24.0">
+         <children>
+              <Label layoutY="41.0" prefHeight="55.0" prefWidth="146.0" text="Quantity">
+                  <font>
+                      <Font name="System Bold" size="32.0" />
+                  </font>
+              </Label>
+              <TextField fx:id="Quantity" layoutX="150.0" layoutY="34.0" onAction="#Calculate_selected_item" prefHeight="55.0" prefWidth="282.0">
+                  <font>
+                      <Font size="32.0" />
+                  </font>
+              </TextField>
+              <Label layoutX="7.0" layoutY="119.0" text="Item Selection">
+                  <font>
+                      <Font size="21.0" />
+                  </font>
+              </Label>
+              <Label fx:id="Item_selected_label" alignment="CENTER" layoutX="150.0" layoutY="107.0" prefHeight="55.0" prefWidth="441.0" style="-fx-border-color: Black;" text="Item Selection" textAlignment="CENTER">
+                  <font>
+                      <Font name="System Bold" size="27.0" />
+                  </font>
+              </Label>
+              <Label fx:id="OR_Number" layoutX="150.0" prefHeight="15.0" prefWidth="282.0" text="OR Number">
+                  <font>
+                      <Font name="System Bold" size="15.0" />
+                  </font>
+              </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="642.0" layoutY="5.0">
+         <children>
+              <Label layoutX="260.0" layoutY="5.0" prefHeight="21.0" prefWidth="90.0" text="Student ID:">
+                  <font>
+                      <Font name="System Bold" size="15.0" />
+                  </font>
+              </Label>
+              <TextField fx:id="Student_Id" layoutX="360.0" onAction="#Student_ID_Action" onTouchPressed="#Touch_Press" prefHeight="31.0" prefWidth="140.0">
+                  <font>
+                      <Font name="System Bold" size="15.0" />
+                  </font>
+              </TextField>
+              <Label fx:id="StudentCredit" layoutY="5.0" prefHeight="21.0" prefWidth="258.0" text="Student Credit:">
+                  <font>
+                      <Font size="15.0" />
+                  </font>
+              </Label>
+              <Button fx:id="Scan_NFC" layoutX="1.0" layoutY="33.0" mnemonicParsing="false" onAction="#Scan_NFC" prefHeight="32.0" prefWidth="183.0" text="Scan Card">
+                  <font>
+                      <Font name="System Bold" size="15.0" />
+                  </font>
+              </Button>
+            <Button fx:id="PayCard_" layoutX="261.0" layoutY="33.0" mnemonicParsing="false" onAction="#PayCard_" prefHeight="32.0" prefWidth="239.0" text="Pay with Credit">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="32.0" layoutY="704.0">
+         <children>
+              <Label fx:id="Mode_label" prefHeight="31.0" prefWidth="605.0" text="Mode:" textFill="#f51616">
+                  <font>
+                      <Font name="System Bold" size="22.0" />
+                  </font>
+              </Label>
+              <Label fx:id="label_sales" layoutX="610.0" prefHeight="25.0" prefWidth="494.0" text="Sales Invoice:" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="610.0" AnchorPane.rightAnchor="0.0">
+                  <font>
+                      <Font name="System Bold" size="20.0" />
+                  </font>
+              </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="25.0" layoutY="207.0" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="518.0" AnchorPane.topAnchor="207.0">
+         <children>
+              <TabPane prefHeight="497.0" prefWidth="605.0" stylesheets="@Tab_pane.css" tabClosingPolicy="UNAVAILABLE">
+                  <tabs>
+                      <Tab text="Viands">
+                          <content>
+                              <GridPane prefHeight="497.0" prefWidth="258.0" styleClass="grid" stylesheets="@Tab_pane.css">
+                                  <columnConstraints>
+                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  </columnConstraints>
+                                  <rowConstraints>
+                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  </rowConstraints>
+                                  <children>
+                                      <Button fx:id="Button_8" mnemonicParsing="false" onAction="#item_9" prefHeight="99.0" prefWidth="206.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_7" mnemonicParsing="false" onAction="#item_8" prefHeight="99.0" prefWidth="204.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button mnemonicParsing="false" text="Button" />
+                                      <Button fx:id="Button_0" mnemonicParsing="false" onAction="#item_1" prefHeight="106.0" prefWidth="202.0" text="Button">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_3" mnemonicParsing="false" onAction="#item_4" prefHeight="97.0" prefWidth="206.0" text="Button" GridPane.rowIndex="1">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_1" mnemonicParsing="false" onAction="#item_2" prefHeight="100.0" prefWidth="204.0" text="Button" GridPane.columnIndex="1">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                              <AnchorPane GridPane.columnIndex="2">
+                                 <children>
+                                            <Button fx:id="Button_2" mnemonicParsing="false" onAction="#item_3" prefHeight="100.0" prefWidth="206.0" text="Button">
+                                                <font>
+                                                    <Font name="System Bold" size="15.0" />
+                                                </font>
+                                            </Button>
+                                 </children>
+                              </AnchorPane>
+                                      <Button fx:id="Button_4" mnemonicParsing="false" onAction="#item_5" prefHeight="100.0" prefWidth="205.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_5" mnemonicParsing="false" onAction="#item_6" prefHeight="97.0" prefWidth="205.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_6" mnemonicParsing="false" onAction="#item_7" prefHeight="107.0" prefWidth="202.0" text="Button" GridPane.rowIndex="2">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_9" mnemonicParsing="false" onAction="#item_10" prefHeight="105.0" prefWidth="202.0" text="Button" GridPane.rowIndex="3">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_10" mnemonicParsing="false" onAction="#item_11" prefHeight="105.0" prefWidth="202.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_11" mnemonicParsing="false" onAction="#item_12" prefHeight="109.0" prefWidth="201.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_12" mnemonicParsing="false" onAction="#item_13" prefHeight="96.0" prefWidth="202.0" text="Button" GridPane.rowIndex="4">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_13" mnemonicParsing="false" onAction="#Item_14" prefHeight="100.0" prefWidth="202.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_14" mnemonicParsing="false" onAction="#Item_15" prefHeight="99.0" prefWidth="218.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                  </children>
+                              </GridPane>
+                          </content>
+                      </Tab>
+                      <Tab text="Drinks">
+                          <content>
+                              <GridPane prefHeight="497.0" prefWidth="258.0" styleClass="grid" stylesheets="@Tab_pane.css">
+                                  <columnConstraints>
+                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  </columnConstraints>
+                                  <rowConstraints>
+                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  </rowConstraints>
+                                  <children>
+                                      <Button fx:id="Button_23" mnemonicParsing="false" onAction="#item_24" prefHeight="99.0" prefWidth="206.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_22" mnemonicParsing="false" onAction="#item_23" prefHeight="99.0" prefWidth="204.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button mnemonicParsing="false" text="Button" />
+                                      <Button fx:id="Button_15" mnemonicParsing="false" onAction="#item_16" prefHeight="106.0" prefWidth="202.0" text="Button">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_18" mnemonicParsing="false" onAction="#item_19" prefHeight="97.0" prefWidth="206.0" text="Button" GridPane.rowIndex="1">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_16" mnemonicParsing="false" onAction="#item_17" prefHeight="100.0" prefWidth="204.0" text="Button" GridPane.columnIndex="1">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_17" mnemonicParsing="false" onAction="#item_18" prefHeight="100.0" prefWidth="206.0" text="Button" GridPane.columnIndex="2">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_19" mnemonicParsing="false" onAction="#item_20" prefHeight="100.0" prefWidth="205.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_20" mnemonicParsing="false" onAction="#item_21" prefHeight="97.0" prefWidth="205.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_21" mnemonicParsing="false" onAction="#item_22" prefHeight="107.0" prefWidth="202.0" text="Button" GridPane.rowIndex="2">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_24" mnemonicParsing="false" onAction="#item_25" prefHeight="105.0" prefWidth="202.0" text="Button" GridPane.rowIndex="3">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_25" mnemonicParsing="false" onAction="#item_26" prefHeight="105.0" prefWidth="202.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_26" mnemonicParsing="false" onAction="#item_27" prefHeight="109.0" prefWidth="201.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_27" mnemonicParsing="false" onAction="#item_28" prefHeight="96.0" prefWidth="202.0" text="Button" GridPane.rowIndex="4">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_28" mnemonicParsing="false" onAction="#Item_29" prefHeight="100.0" prefWidth="202.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_29" mnemonicParsing="false" onAction="#Item_30" prefHeight="99.0" prefWidth="218.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                  </children>
+                              </GridPane>
+                          </content>
+                      </Tab>
+                      <Tab text="Snacks">
+                          <content>
+                              <GridPane prefHeight="497.0" prefWidth="258.0" styleClass="grid" stylesheets="@Tab_pane.css">
+                                  <columnConstraints>
+                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  </columnConstraints>
+                                  <rowConstraints>
+                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  </rowConstraints>
+                                  <children>
+                                      <Button fx:id="Button_38" mnemonicParsing="false" onAction="#item_39" prefHeight="99.0" prefWidth="206.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_37" mnemonicParsing="false" onAction="#item_38" prefHeight="99.0" prefWidth="204.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button mnemonicParsing="false" text="Button" />
+                                      <Button fx:id="Button_30" mnemonicParsing="false" onAction="#item_31" prefHeight="106.0" prefWidth="202.0" text="Button">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_33" mnemonicParsing="false" onAction="#item_34" prefHeight="97.0" prefWidth="206.0" text="Button" GridPane.rowIndex="1">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_31" mnemonicParsing="false" onAction="#item_32" prefHeight="100.0" prefWidth="204.0" text="Button" GridPane.columnIndex="1">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_32" mnemonicParsing="false" onAction="#item_33" prefHeight="100.0" prefWidth="206.0" text="Button" GridPane.columnIndex="2">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_34" mnemonicParsing="false" onAction="#item_35" prefHeight="100.0" prefWidth="205.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_35" mnemonicParsing="false" onAction="#item_36" prefHeight="97.0" prefWidth="205.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_36" mnemonicParsing="false" onAction="#item_37" prefHeight="107.0" prefWidth="202.0" text="Button" GridPane.rowIndex="2">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_39" mnemonicParsing="false" onAction="#item_40" prefHeight="105.0" prefWidth="202.0" text="Button" GridPane.rowIndex="3">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_40" mnemonicParsing="false" onAction="#item_41" prefHeight="105.0" prefWidth="202.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_41" mnemonicParsing="false" onAction="#item_42" prefHeight="109.0" prefWidth="201.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_42" mnemonicParsing="false" onAction="#item_43" prefHeight="96.0" prefWidth="202.0" text="Button" GridPane.rowIndex="4">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_43" mnemonicParsing="false" onAction="#Item_44" prefHeight="100.0" prefWidth="202.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_44" mnemonicParsing="false" onAction="#Item_45" prefHeight="99.0" prefWidth="218.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                  </children>
+                              </GridPane>
+                          </content>
+                      </Tab>
+                      <Tab text="Others">
+                          <content>
+                              <GridPane prefHeight="497.0" prefWidth="258.0" styleClass="grid" stylesheets="@Tab_pane.css">
+                                  <columnConstraints>
+                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  </columnConstraints>
+                                  <rowConstraints>
+                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  </rowConstraints>
+                                  <children>
+                                      <Button fx:id="Button_53" mnemonicParsing="false" onAction="#item_54" prefHeight="99.0" prefWidth="206.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_52" mnemonicParsing="false" onAction="#item_53" prefHeight="99.0" prefWidth="204.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button mnemonicParsing="false" text="Button" />
+                                      <Button fx:id="Button_45" mnemonicParsing="false" onAction="#item_46" prefHeight="106.0" prefWidth="202.0" text="Button">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_48" mnemonicParsing="false" onAction="#item_49" prefHeight="97.0" prefWidth="206.0" text="Button" GridPane.rowIndex="1">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_46" mnemonicParsing="false" onAction="#item_47" prefHeight="100.0" prefWidth="204.0" text="Button" GridPane.columnIndex="1">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_47" mnemonicParsing="false" onAction="#item_48" prefHeight="100.0" prefWidth="206.0" text="Button" GridPane.columnIndex="2">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_49" mnemonicParsing="false" onAction="#Item_50" prefHeight="100.0" prefWidth="205.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_50" mnemonicParsing="false" onAction="#item_51" prefHeight="97.0" prefWidth="205.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_51" mnemonicParsing="false" onAction="#item_52" prefHeight="107.0" prefWidth="202.0" text="Button" GridPane.rowIndex="2">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_54" mnemonicParsing="false" onAction="#item_55" prefHeight="105.0" prefWidth="202.0" text="Button" GridPane.rowIndex="3">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_55" mnemonicParsing="false" onAction="#item_56" prefHeight="105.0" prefWidth="202.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_56" mnemonicParsing="false" onAction="#item_57" prefHeight="109.0" prefWidth="201.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_57" mnemonicParsing="false" onAction="#item_58" prefHeight="96.0" prefWidth="202.0" text="Button" GridPane.rowIndex="4">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_58" mnemonicParsing="false" onAction="#Item_59" prefHeight="100.0" prefWidth="202.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                      <Button fx:id="Button_59" mnemonicParsing="false" onAction="#Item_60" prefHeight="99.0" prefWidth="218.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                  </children>
+                              </GridPane>
+                          </content>
+                      </Tab>
+                  </tabs>
+              </TabPane>
+         </children>
+      </AnchorPane>
       <ImageView fx:id="Imageview" fitHeight="108.0" fitWidth="140.0" layoutX="475.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="LabelName" layoutX="475.0" layoutY="123.0" prefHeight="17.0" prefWidth="146.0" textAlignment="CENTER" textFill="#2c9e09" />
     </children>

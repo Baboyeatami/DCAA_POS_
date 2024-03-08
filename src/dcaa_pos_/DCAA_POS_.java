@@ -54,6 +54,7 @@ public class DCAA_POS_ extends Application {
     public static void main(String[] args) throws IOException {
         DBConnection.ReadIPaddress();
         launch(args);
+        System.out.println(System.getProperty("user.dir"));
 
     }
 

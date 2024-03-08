@@ -78,6 +78,7 @@ public class Student_CreditController implements Initializable {
 
     ObservableList<Student_Credit_history_data_Model> tableDataTransaction = FXCollections.observableArrayList();
     ObservableList<Student_Credit_history_data_Model> tableDataStudentList = FXCollections.observableArrayList();
+
     @FXML
     private Label Total_credit;
     @FXML
@@ -96,6 +97,10 @@ public class Student_CreditController implements Initializable {
     private ComboBox<String> Search;
     @FXML
     private TextField SearchBox;
+    @FXML
+    private Button BatchPosting;
+    @FXML
+    private Button C_Report;
 
     /**
      * Initializes the controller class.
@@ -408,5 +413,40 @@ public class Student_CreditController implements Initializable {
         Search.setItems(data);
         //OptionsCombo.setValue("Select User Level");
 
+    }
+
+    @FXML
+    private void OpenBatchPsoting(ActionEvent event) {
+
+        try {
+            Parent root1 = FXMLLoader.load(getClass().getResource("/dcaa_pos_/BatchPostingCredit_.fxml"));
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setTitle("Batch Posting");
+            stage.setScene(new Scene(root1));
+            stage.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void Credit_Report(ActionEvent event) {
+        try {
+            Parent root1 = FXMLLoader.load(getClass().getResource("/dcaa_pos_/Credit_Report.fxml"));
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setTitle("Batch Posting");
+            stage.setScene(new Scene(root1));
+            stage.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
