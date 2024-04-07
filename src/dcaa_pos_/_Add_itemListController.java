@@ -59,8 +59,11 @@ public class _Add_itemListController implements Initializable {
     String costString = "";
     @FXML
     private TextField cost;
+    @FXML
+    private TextField Barcode;
 
-    void set_Update_data(String ID, String Item_name, String Description, String price, String comboItemType, String Cost_String, boolean Update) {
+    void set_Update_data(String ID, String Barcode, String Item_name, String Description, String price, String comboItemType, String Cost_String, boolean Update
+    ) {
         ItemID = ID;
         this.Item_name.setText(Item_name);
         this.Description.setText(Description);
@@ -69,6 +72,7 @@ public class _Add_itemListController implements Initializable {
         this.cost.setText(Cost_String);
         AddNewButton.setText("Update");
         this.Update = Update;
+        this.Barcode.setText(Barcode);
     }
 
     public void setInventory_(Inventory_Controller inventory_) {
@@ -130,7 +134,7 @@ public class _Add_itemListController implements Initializable {
 
             if (Update) {
                 System.out.println("tobe updated:" + ItemID);
-                ps = c.prepareStatement("Update dcaa_pos.items  SET Item_name='" + Item_name.getText() + "',Cost='" + cost.getText() + "', Description='" + Description.getText() + "', Price='" + price.getText() + "', Item_type_idItem_type='" + IDtypes.get(comboItemType.getSelectionModel().getSelectedIndex()) + "' where idItems='" + ItemID + "'");
+                ps = c.prepareStatement("Update dcaa_pos.items  SET  Barcode='" + Barcode.getText() + "', Item_name='" + Item_name.getText() + "', Cost='" + cost.getText() + "', Description='" + Description.getText() + "', Price='" + price.getText() + "', Item_type_idItem_type='" + IDtypes.get(comboItemType.getSelectionModel().getSelectedIndex()) + "' where idItems='" + ItemID + "'");
 
                 if (!ps.execute()) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -143,8 +147,8 @@ public class _Add_itemListController implements Initializable {
                         Item_name.setText("");
                         Description.setText("");
                         price.setText("");
-                        price.requestFocus();
-
+                        cost.clear();
+                        Barcode.clear();
                         inventory_.loaddata();
                         Update = false;
 
@@ -156,7 +160,7 @@ public class _Add_itemListController implements Initializable {
 
                 String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
 
-                ps = c.prepareStatement("Insert into dcaa_pos.items (Item_name, Description, Price, create_time, update_time, Item_type_idItem_type,Cost) values ('" + Item_name.getText() + "','" + Description.getText() + "','" + price.getText() + "','" + timeStamp + "','" + timeStamp + "','" + IDtypes.get(comboItemType.getSelectionModel().getSelectedIndex()) + "','" + cost.getText() + "')");
+                ps = c.prepareStatement("Insert into dcaa_pos.items (Item_name, Description, Price, create_time, update_time, Item_type_idItem_type,Cost,Barcode) values ('" + Item_name.getText() + "','" + Description.getText() + "','" + price.getText() + "','" + timeStamp + "','" + timeStamp + "','" + IDtypes.get(comboItemType.getSelectionModel().getSelectedIndex()) + "','" + cost.getText() + "','" + Barcode.getText() + "')");
 
                 if (!ps.execute()) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -170,6 +174,7 @@ public class _Add_itemListController implements Initializable {
                         Description.setText("");
                         price.setText("");
                         cost.setText("");
+                        Barcode.setText("");
                         Item_name.requestFocus();
 
                     }

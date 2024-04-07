@@ -32,6 +32,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -55,8 +56,6 @@ public class Credit_ReportController implements Initializable {
     private TextField Search;
     @FXML
     private Button Print;
-    @FXML
-    private Button Load;
     @FXML
     private Button Close;
     @FXML
@@ -114,11 +113,10 @@ public class Credit_ReportController implements Initializable {
     }
 
     @FXML
-    private void Load(ActionEvent event) {
-    }
-
-    @FXML
     private void Close(ActionEvent event) {
+
+        Stage close = (Stage) Close.getScene().getWindow();
+        close.close();
     }
 
     void loaddata() {
@@ -329,8 +327,6 @@ public class Credit_ReportController implements Initializable {
 
         LocalDate selectedDateFrom = DateFrom.getValue();
         LocalDate selectedDateTo = DateTo.getValue();
-        Date sqlDateFrom = Date.valueOf(selectedDateFrom);
-        Date sqlDateTo = Date.valueOf(selectedDateTo);
 
         if (selectedDateFrom == null && selectedDateTo == null) {
             Alert alert = new Alert(AlertType.ERROR);
@@ -342,6 +338,9 @@ public class Credit_ReportController implements Initializable {
 
         } else {
 
+            Date sqlDateFrom = Date.valueOf(selectedDateFrom);
+            Date sqlDateTo = Date.valueOf(selectedDateTo);
+
             JasperReport JR;
             JasperPrint JP;
 
@@ -349,7 +348,7 @@ public class Credit_ReportController implements Initializable {
             // String Source="C:\\Users\\JAMIEXXX3\\Documents\\NetBeansProjects\\Phonelist\\src\\Forms\\report1.jrxml";
             JasperDesign Jd = JRXmlLoader.load(System.getProperty("user.dir") + "\\\\reports\\\\CreditReport.jrxml");
 
-            String SQL = "SELECT * FROM dcaa_pos.credit_history where createtime BETWEEN '" + sqlDateFrom.toString() + "' AND '" + selectedDateTo.toString() + "'";
+            String SQL = "SELECT * FROM dcaa_pos.credit_history where createtime BETWEEN '" + sqlDateFrom.toString() + "' AND '" + selectedDateTo.toString() + "' AND Transaction_type='credit' ";
             String Location = System.getProperty("user.dir") + "\\\\reports\\\\";
 
             JRDesignQuery JQ = new JRDesignQuery();

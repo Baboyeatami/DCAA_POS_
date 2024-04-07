@@ -179,6 +179,7 @@ public class POS_MainController implements Initializable {
     private MenuItem Item_Search;
 
     POS_searchController POS_searchController;
+    POS_ReadBarcode POS_Barcode;
     private String UserID;
 
     @FXML
@@ -293,6 +294,8 @@ public class POS_MainController implements Initializable {
     private Label LabelName;
     @FXML
     private MenuItem Overide_;
+    @FXML
+    private MenuItem R_Barcode;
 
     public void setUserID(String UserID) {
         this.UserID = UserID;
@@ -474,6 +477,11 @@ public class POS_MainController implements Initializable {
     }
 
     boolean Manager_overide = false;
+
+    void Set_Quantity(String input) {
+
+        Quantity.setText(input);
+    }
 
     void calculate_selected() {
         try {
@@ -937,6 +945,47 @@ public class POS_MainController implements Initializable {
 
         try {
             ps = c.prepareStatement("SELECT * FROM dcaa_pos.items where idItems=" + a + " ");
+            ResultSet rs = ps.executeQuery();
+
+            double price = 0.0;
+            if (rs.next()) {
+                if (rs.getString("Price") != null) {
+                    price = Double.parseDouble(rs.getString("Price"));
+                } else {
+                    price = 0.0;
+                }
+                Button_List.add(new Item_data_(rs.getString("idItems"), rs.getString("idItems"), rs.getString("Item_name"), rs.getString("Item_type_idItem_type"), "Searched Item", price));
+                System.out.println(rs.getString("idItems"));
+
+            }
+
+            c.close();
+            ps.close();
+
+            Item_selected_label.setText(Button_List.get(Button_List.size() - 1).ProductName);
+            Quantity.requestFocus();
+            System.out.println("Test search:" + Button_List.get(Button_List.size() - 1).ProductName);
+            Item_index = Button_List.size() - 1;
+            System.out.println(Button_List.size() - 1);
+            Mode_label.setText("Mode: Item Selection Enter Quantity");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    void Barcode_Data_transfer(String a) {
+        //Item_index = Integer.parseInt(a);
+
+        DBConnection.init();
+
+        Connection c = DBConnection.getConnection();
+
+        PreparedStatement ps;
+
+        try {
+            ps = c.prepareStatement("SELECT * FROM dcaa_pos.items where barcode=" + a + " ");
             ResultSet rs = ps.executeQuery();
 
             double price = 0.0;
@@ -1737,6 +1786,30 @@ public class POS_MainController implements Initializable {
             Logger.getLogger(POS_MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    @FXML
+    private void Read_Barcode(ActionEvent event) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dcaa_pos_/POS_ReadBarcode.fxml"));
+            Parent root1 = loader.load();
+            POS_Barcode = loader.getController();
+            POS_Barcode.controller = this;
+            POS_Barcode.set_Fucos();
+
+            Stage stage = new Stage();
+            stage.setX(380);
+            stage.setY(320);
+
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setTitle("Barcode Read");
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(POS_MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

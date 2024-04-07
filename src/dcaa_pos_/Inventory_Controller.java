@@ -79,6 +79,8 @@ public class Inventory_Controller implements Initializable {
     private ComboBox<String> combo;
     @FXML
     private TextField Search;
+    @FXML
+    private TableColumn<Inventory_Data_Model, String> BarCode;
 
     /**
      * Initializes the controller class.
@@ -91,6 +93,7 @@ public class Inventory_Controller implements Initializable {
         price.setCellValueFactory(new PropertyValueFactory<>("Price"));
         Item_type.setCellValueFactory(new PropertyValueFactory<>("ItemType"));
         Cost.setCellValueFactory(new PropertyValueFactory<>("Cost"));
+        BarCode.setCellValueFactory(new PropertyValueFactory<>("Barcode"));
         loaddata();
         loadcombo_data();
     }
@@ -170,7 +173,7 @@ public class Inventory_Controller implements Initializable {
         PreparedStatement ps, ps1 = null;
         tableData.clear();
         try {
-            ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost, Item_type_idItem_type FROM dcaa_pos.items");
+            ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost,Barcode,Item_type_idItem_type FROM dcaa_pos.items");
             ResultSet rs = ps.executeQuery();
 
             String ItemType = "";
@@ -186,7 +189,7 @@ public class Inventory_Controller implements Initializable {
                     }
                 }
                 System.out.println(rs.getString("Description"));
-                tableData.add(new Inventory_Data_Model(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), ItemType, rs.getString("Cost")));
+                tableData.add(new Inventory_Data_Model(rs.getString(1), rs.getString("Barcode"), rs.getString(2), rs.getString(3), rs.getString(4), ItemType, rs.getString("Cost")));
                 System.out.println(rs.getString(1));
             }
 
@@ -256,7 +259,7 @@ public class Inventory_Controller implements Initializable {
             Parent root1 = loader.load();
             Update_itemListController = loader.getController();
             Update_itemListController.setInventory_(this);
-            Update_itemListController.set_Update_data(model.ID, model.Item_name, model.Description, model.Price, model.ItemType, model.Cost, true);
+            Update_itemListController.set_Update_data(model.ID, model.Barcode, model.Item_name, model.Description, model.Price, model.ItemType, model.Cost, true);
 
             Stage stage = new Stage();
             stage.initModality(Modality.WINDOW_MODAL);
@@ -283,22 +286,22 @@ public class Inventory_Controller implements Initializable {
         try {
             switch (combo.getSelectionModel().getSelectedIndex()) {
                 case 0: {
-                    ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost, Item_type_idItem_type FROM dcaa_pos.items where idItems like '" + Search + "'");
+                    ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost, Item_type_idItem_type,Barcode FROM dcaa_pos.items where idItems like '" + Search + "'");
                     rs = ps.executeQuery();
                     break;
                 }
                 case 1: {
-                    ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost, Item_type_idItem_type FROM dcaa_pos.items where Item_name like '" + Search + "'");
+                    ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost, Item_type_idItem_type,Barcode FROM dcaa_pos.items where Item_name like '" + Search + "'");
                     rs = ps.executeQuery();
                     break;
                 }
                 case 2: {
-                    ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost, Item_type_idItem_type FROM dcaa_pos.items where Description like '" + Search + "'");
+                    ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost, Item_type_idItem_type,Barcode FROM dcaa_pos.items where Description like '" + Search + "'");
                     rs = ps.executeQuery();
                     break;
                 }
                 default:
-                    ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost, Item_type_idItem_type FROM dcaa_pos.items");
+                    ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost, Item_type_idItem_type,Barcode FROM dcaa_pos.items");
                     rs = ps.executeQuery();
                     break;
             }
@@ -316,7 +319,7 @@ public class Inventory_Controller implements Initializable {
                     }
                 }
                 System.out.println(rs.getString("Description"));
-                tableData.add(new Inventory_Data_Model(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), ItemType, rs.getString("Cost")));
+                tableData.add(new Inventory_Data_Model(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), ItemType, rs.getString("Cost"), rs.getString("Barcode")));
                 System.out.println(rs.getString(1));
             }
 

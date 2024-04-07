@@ -22,12 +22,13 @@
       </Label>
       <TableView fx:id="Table" layoutX="219.0" layoutY="55.0" prefHeight="531.0" prefWidth="768.0" AnchorPane.leftAnchor="219.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="55.0">
         <columns>
-          <TableColumn fx:id="Item_id" prefWidth="129.0" text="Item ID" />
-          <TableColumn fx:id="item_name" prefWidth="177.0" text="Item Name" />
-            <TableColumn fx:id="Description" prefWidth="135.0" text="Description" />
-            <TableColumn fx:id="price" prefWidth="102.0" text="Price" />
-            <TableColumn fx:id="Cost" prefWidth="105.0" text="Cost" />
-            <TableColumn fx:id="Item_type" minWidth="0.0" prefWidth="115.0" text="Item Type" />
+          <TableColumn fx:id="Item_id" prefWidth="72.0" text="Item ID" />
+            <TableColumn fx:id="BarCode" prefWidth="109.0" text="Barcode" />
+          <TableColumn fx:id="item_name" prefWidth="181.0" text="Item Name" />
+            <TableColumn fx:id="Description" prefWidth="126.0" text="Description" />
+            <TableColumn fx:id="price" prefWidth="93.0" text="Price" />
+            <TableColumn fx:id="Cost" prefWidth="96.0" text="Cost" />
+            <TableColumn fx:id="Item_type" minWidth="0.0" prefWidth="90.0" text="Item Type" />
         </columns>
          <contextMenu>
             <ContextMenu>

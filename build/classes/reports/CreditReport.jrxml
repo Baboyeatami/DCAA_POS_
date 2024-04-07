@@ -39,73 +39,83 @@
         <band splitType="Stretch"/>
     </background>
     <title>
-        <band height="21" splitType="Stretch">
+        <band height="35" splitType="Stretch">
             <staticText>
-                <reportElement x="200" y="0" width="180" height="20" uuid="545b8e99-2742-443c-a32c-e9f0228162d9"/>
+                <reportElement x="200" y="0" width="167" height="20" uuid="545b8e99-2742-443c-a32c-e9f0228162d9"/>
                 <textElement>
                     <font size="14"/>
                 </textElement>
                 <text><![CDATA[DCAA POS Credit Report]]></text>
             </staticText>
+            <staticText>
+                <reportElement x="176" y="20" width="220" height="15" uuid="770e22cf-397f-4115-9086-b45bd6847d9f"/>
+                <textElement>
+                    <font size="10"/>
+                </textElement>
+                <text><![CDATA[Digoc Central Adventist Academy Point of sales ]]></text>
+            </staticText>
         </band>
     </title>
     <pageHeader>
         <band height="41" splitType="Stretch">
-            <staticText>
-                <reportElement x="0" y="1" width="24" height="19" uuid="c247caea-5049-4a0f-9082-c635a41d15c1"/>
-                <textElement>
-                    <font isBold="true"/>
-                </textElement>
-                <text><![CDATA[Date:]]></text>
-            </staticText>
             <textField pattern="MMMMM dd, yyyy">
-                <reportElement x="24" y="1" width="88" height="19" uuid="9ac3f419-cd67-4d1a-80e4-a1e800cc63ef"/>
+                <reportElement x="30" y="2" width="91" height="18" uuid="9ac3f419-cd67-4d1a-80e4-a1e800cc63ef"/>
                 <textElement>
                     <font size="12" isItalic="true"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$P{parameter1}]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement x="0" y="20" width="24" height="19" uuid="13cb426f-e08a-44cd-beac-20e87ea189b7"/>
-                <textElement>
+                <reportElement x="6" y="22" width="24" height="19" uuid="13cb426f-e08a-44cd-beac-20e87ea189b7"/>
+                <textElement textAlignment="Right">
                     <font isBold="true"/>
                 </textElement>
-                <text><![CDATA[To]]></text>
+                <text><![CDATA[To:]]></text>
             </staticText>
             <textField pattern="MMMMM dd, yyyy">
-                <reportElement x="21" y="20" width="91" height="20" uuid="18d30177-884d-4537-9440-932b0388dd31"/>
+                <reportElement x="30" y="21" width="91" height="18" uuid="18d30177-884d-4537-9440-932b0388dd31"/>
                 <textElement>
                     <font size="12" isItalic="true"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$P{parameter2}]]></textFieldExpression>
             </textField>
+            <staticText>
+                <reportElement x="0" y="3" width="30" height="19" uuid="abcb962d-7d8d-471f-957a-f7a6bfd5a0fa"/>
+                <textElement textAlignment="Right">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[From:]]></text>
+            </staticText>
+            <line>
+                <reportElement x="0" y="40" width="554" height="1" uuid="39f8818f-5dd0-42ae-a2be-8195f98af1e9"/>
+            </line>
         </band>
     </pageHeader>
     <columnHeader>
-        <band height="22" splitType="Stretch">
+        <band height="15" splitType="Stretch">
+            <line>
+                <reportElement x="0" y="14" width="554" height="1" uuid="369ddca1-1a61-4c94-9c31-66c095c179de"/>
+            </line>
             <staticText>
-                <reportElement x="41" y="0" width="100" height="20" uuid="5102e438-fae5-4894-9f58-3fd7dcc49cd9"/>
+                <reportElement x="394" y="0" width="100" height="15" uuid="638b3f76-605b-42d8-9d8a-8775dc039a60"/>
                 <textElement textAlignment="Center"/>
-                <text><![CDATA[OR Number]]></text>
+                <text><![CDATA[Amount]]></text>
             </staticText>
             <staticText>
-                <reportElement x="152" y="0" width="100" height="20" uuid="0f067a3a-5ab6-475a-8a71-ed8639d198ad"/>
-                <textElement textAlignment="Center"/>
-                <text><![CDATA[Student Id]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="252" y="0" width="100" height="20" uuid="5d5483de-d115-45d6-bf00-5e2ffbb0b12e"/>
+                <reportElement x="252" y="0" width="100" height="15" uuid="5d5483de-d115-45d6-bf00-5e2ffbb0b12e"/>
                 <textElement textAlignment="Center"/>
                 <text><![CDATA[Transaction type]]></text>
             </staticText>
             <staticText>
-                <reportElement x="394" y="0" width="100" height="20" uuid="638b3f76-605b-42d8-9d8a-8775dc039a60"/>
+                <reportElement x="152" y="0" width="100" height="15" uuid="0f067a3a-5ab6-475a-8a71-ed8639d198ad"/>
                 <textElement textAlignment="Center"/>
-                <text><![CDATA[Amount]]></text>
+                <text><![CDATA[Student Id]]></text>
             </staticText>
-            <line>
-                <reportElement x="0" y="20" width="554" height="1" uuid="369ddca1-1a61-4c94-9c31-66c095c179de"/>
-            </line>
+            <staticText>
+                <reportElement x="41" y="0" width="100" height="15" uuid="5102e438-fae5-4894-9f58-3fd7dcc49cd9"/>
+                <textElement textAlignment="Center"/>
+                <text><![CDATA[OR Number]]></text>
+            </staticText>
         </band>
     </columnHeader>
     <detail>

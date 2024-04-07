@@ -37,6 +37,7 @@ public class DCAA_POS_ extends Application {
             check_Card_Credithistory();
             check_invoice_ramakrs();
             check_StudentImageStatus();
+            check_Barcode();
         } catch (SQLException ex) {
             Logger.getLogger(DCAA_POS_.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -185,6 +186,33 @@ public class DCAA_POS_ extends Application {
                 System.out.println("Alter table NFC_Card_No in Credit History completed ");
             } else {
                 System.out.println("NFC_Card_No coloum exist: no table altered");
+            }
+
+        } catch (IOException ex) {
+            //Logger.getLogger(DCAA_BILLING.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    static void check_Barcode() throws SQLException {
+
+        try {
+            DBConnection.ReadIPaddress();
+            DBConnection.init();
+            PreparedStatement ps;
+            ResultSet rs;
+            Connection c = DBConnection.getConnection();
+            System.out.println("Barcode Check");
+            ps = c.prepareStatement("Show columns from dcaa_pos.items where field ='Barcode'");
+            rs = ps.executeQuery();
+
+            if (!rs.next()) {
+                //System.out.println(rs.getString(1) + " Card Reading  check_Card_Coloum();");
+                ps = c.prepareStatement("ALTER TABLE dcaa_pos.items ADD COLUMN Barcode varchar(155)");
+                ps.execute();
+                System.out.println("Alter table Barcode in items completed ");
+            } else {
+                System.out.println("Barcode coloum exist: no table altered");
             }
 
         } catch (IOException ex) {

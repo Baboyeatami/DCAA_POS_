@@ -53,6 +53,7 @@ public class POS_searchController implements Initializable {
     @FXML
     private TableColumn<ItemTypeModel, String> Price;
     POS_MainController controller;
+    POS_ReadBarcode controller1;
 
     /**
      * Initializes the controller class.

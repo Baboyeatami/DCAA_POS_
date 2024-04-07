@@ -117,6 +117,11 @@
                         </MenuItem>
                         <MenuItem mnemonicParsing="false" text="Item 9" />
                         <MenuItem mnemonicParsing="false" text="Item 10" />
+                  <MenuItem fx:id="R_Barcode" mnemonicParsing="false" onAction="#Read_Barcode" text="Read Barcode">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="R" control="ANY" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
@@ -208,7 +213,7 @@
                       <Font name="System Bold" size="27.0" />
                   </font>
               </Label>
-              <Label fx:id="OR_Number" layoutX="150.0" prefHeight="15.0" prefWidth="282.0" text="OR Number">
+              <Label fx:id="OR_Number" layoutX="-2.0" layoutY="4.0" prefHeight="21.0" prefWidth="591.0" text="OR Number">
                   <font>
                       <Font name="System Bold" size="15.0" />
                   </font>
@@ -229,7 +234,7 @@
               </TextField>
               <Label fx:id="StudentCredit" layoutY="5.0" prefHeight="21.0" prefWidth="258.0" text="Student Credit:">
                   <font>
-                      <Font size="15.0" />
+                      <Font name="System Bold" size="15.0" />
                   </font>
               </Label>
               <Button fx:id="Scan_NFC" layoutX="1.0" layoutY="33.0" mnemonicParsing="false" onAction="#Scan_NFC" prefHeight="32.0" prefWidth="183.0" text="Scan Card">
@@ -288,7 +293,6 @@
                                               <Font name="System Bold" size="15.0" />
                                           </font>
                                       </Button>
-                                      <Button mnemonicParsing="false" text="Button" />
                                       <Button fx:id="Button_0" mnemonicParsing="false" onAction="#item_1" prefHeight="106.0" prefWidth="202.0" text="Button">
                                           <font>
                                               <Font name="System Bold" size="15.0" />
@@ -306,7 +310,7 @@
                                       </Button>
                               <AnchorPane GridPane.columnIndex="2">
                                  <children>
-                                            <Button fx:id="Button_2" mnemonicParsing="false" onAction="#item_3" prefHeight="100.0" prefWidth="206.0" text="Button">
+                                            <Button fx:id="Button_2" layoutY="7.0" mnemonicParsing="false" onAction="#item_3" prefHeight="93.0" prefWidth="198.0" text="Button">
                                                 <font>
                                                     <Font name="System Bold" size="15.0" />
                                                 </font>

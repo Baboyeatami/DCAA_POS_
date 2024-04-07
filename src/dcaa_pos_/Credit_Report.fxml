@@ -25,27 +25,24 @@
                   <TableColumn fx:id="UserID" prefWidth="175.0" text="Date Time" />
               </columns>
             </TableView>
-            <DatePicker fx:id="DateFrom" layoutX="430.0" layoutY="28.0" prefHeight="33.0" prefWidth="159.0" promptText="Select Date" />
+            <DatePicker fx:id="DateFrom" layoutX="430.0" layoutY="28.0" prefHeight="33.0" prefWidth="159.0" promptText="From: Select Date" />
             <Label layoutX="378.0" layoutY="29.0" text="From">
                <font>
                   <Font size="19.0" />
                </font>
             </Label>
-            <DatePicker fx:id="DateTo" layoutX="631.0" layoutY="28.0" prefHeight="33.0" prefWidth="159.0" promptText="Select Date" />
+            <DatePicker fx:id="DateTo" layoutX="631.0" layoutY="28.0" prefHeight="33.0" prefWidth="159.0" promptText="To: Select Date" />
             <Label layoutX="601.0" layoutY="31.0" text="to">
                <font>
                   <Font size="19.0" />
                </font>
             </Label>
             <ComboBox fx:id="ComboSearch" layoutX="21.0" layoutY="26.0" prefHeight="33.0" prefWidth="110.0" promptText="Search OR" />
-            <TextField fx:id="Search" layoutX="137.0" layoutY="26.0" onAction="#LoadSearch" prefHeight="33.0" prefWidth="226.0" />
+            <TextField fx:id="Search" layoutX="137.0" layoutY="26.0" onAction="#LoadSearch" prefHeight="33.0" prefWidth="226.0" promptText="Search All" />
             <ButtonBar layoutX="23.0" layoutY="375.0" prefHeight="70.0" prefWidth="773.0">
               <buttons>
-                <Button mnemonicParsing="false" prefHeight="33.0" text="Button" />
-                  <Button layoutX="697.0" layoutY="18.0" mnemonicParsing="false" prefHeight="37.0" text="Button" />
                   <Button fx:id="LoadDebit" layoutX="697.0" layoutY="18.0" mnemonicParsing="false" onAction="#LoadDebit" prefHeight="38.0" text="Load Search" />
                   <Button fx:id="Print" layoutX="697.0" layoutY="18.0" mnemonicParsing="false" onAction="#Print" prefHeight="37.0" text="Print Credit Report" />
-                  <Button fx:id="Load" layoutX="697.0" layoutY="18.0" mnemonicParsing="false" onAction="#Load" prefHeight="34.0" text="Load" />
                   <Button fx:id="Close" layoutX="697.0" layoutY="18.0" mnemonicParsing="false" onAction="#Close" prefHeight="35.0" text="Close" />
               </buttons>
             </ButtonBar>

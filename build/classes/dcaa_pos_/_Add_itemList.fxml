@@ -11,12 +11,12 @@
 
 <AnchorPane id="AnchorPane" prefHeight="309.0" prefWidth="474.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dcaa_pos_._Add_itemListController">
    <children>
-      <Label layoutX="6.0" layoutY="-4.0" text="New Item">
+      <Label layoutX="183.0" layoutY="10.0" text="New Item">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <ButtonBar layoutX="11.0" layoutY="246.0" prefHeight="40.0" prefWidth="450.0">
+      <ButtonBar layoutX="12.0" layoutY="261.0" prefHeight="40.0" prefWidth="450.0">
         <buttons>
           <Button fx:id="AddNewButton" mnemonicParsing="false" onAction="#AddNewButtoon" text="Add new Item">
                <font>
@@ -30,59 +30,77 @@
             </Button>
         </buttons>
       </ButtonBar>
-      <VBox layoutX="104.0" layoutY="46.0" prefHeight="163.0" prefWidth="353.0" spacing="5.0">
+      <AnchorPane layoutX="104.0" layoutY="46.0" prefHeight="207.0" prefWidth="353.0">
          <children>
-            <TextField fx:id="Item_name" prefHeight="31.0" prefWidth="299.0">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="Description" prefHeight="31.0" prefWidth="299.0">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="price" prefHeight="31.0" prefWidth="299.0">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="cost" layoutX="10.0" layoutY="82.0" prefHeight="31.0" prefWidth="299.0">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </TextField>
-            <ComboBox fx:id="comboItemType" prefHeight="40.0" prefWidth="368.0" promptText="Select item Type" />
+            <VBox prefHeight="163.0" prefWidth="353.0" spacing="5.0">
+               <children>
+                  <TextField fx:id="Item_name" prefHeight="31.0" prefWidth="299.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="Description" prefHeight="31.0" prefWidth="299.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="price" prefHeight="31.0" prefWidth="299.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="cost" layoutX="10.0" layoutY="82.0" prefHeight="31.0" prefWidth="299.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+                  <ComboBox fx:id="comboItemType" prefHeight="40.0" prefWidth="368.0" promptText="Select item Type" />
+                  <TextField fx:id="Barcode" prefHeight="31.0" prefWidth="299.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
          </children>
-      </VBox>
-      <VBox layoutX="6.0" layoutY="46.0" prefHeight="192.0" prefWidth="86.0" spacing="15.0">
+      </AnchorPane>
+      <AnchorPane layoutX="6.0" layoutY="46.0">
          <children>
-            <Label text="Item Name">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <Label text="Descrpition">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <Label text="Price (Php)">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <Label layoutX="10.0" layoutY="82.0" text="Cost (Php)">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <Label text="Item Type">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
+            <VBox layoutX="14.0" prefHeight="192.0" prefWidth="86.0" spacing="15.0">
+               <children>
+                  <Label text="Item Name">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label text="Descrpition">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label text="Price (Php)">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="82.0" text="Cost (Php)">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label text="Item Type">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="154.0" text="BarCode">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
          </children>
-      </VBox>
+      </AnchorPane>
    </children>
 </AnchorPane>
