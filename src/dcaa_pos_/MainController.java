@@ -328,4 +328,13 @@ public class MainController implements Initializable {
 
     }
 
+    void set_CardLoar(String userId) {
+        this.UserId = UserId;
+        System.out.println(UserId + " setup User ID");
+        User_Accounts.setDisable(true);
+        Student.setDisable(true);
+        StudentCreit.setDisable(true);
+
+    }
+
 }

@@ -190,6 +190,8 @@ public class Inventory_Controller implements Initializable {
                 }
                 System.out.println(rs.getString("Description"));
                 tableData.add(new Inventory_Data_Model(rs.getString(1), rs.getString("Barcode"), rs.getString(2), rs.getString(3), rs.getString(4), ItemType, rs.getString("Cost")));
+                //rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), ItemType, rs.getString("Cost"), rs.getString("Barcode")
+
                 System.out.println(rs.getString(1));
             }
 
@@ -286,22 +288,23 @@ public class Inventory_Controller implements Initializable {
         try {
             switch (combo.getSelectionModel().getSelectedIndex()) {
                 case 0: {
-                    ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost, Item_type_idItem_type,Barcode FROM dcaa_pos.items where idItems like '" + Search + "'");
+                    ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost,Barcode,Item_type_idItem_type FROM dcaa_pos.items where idItems like '" + Search + "'");
+                    // SELECT idItems, Item_name, Description, Price,Cost,Barcode,Item_type_idItem_type FROM dcaa_pos.items
                     rs = ps.executeQuery();
                     break;
                 }
                 case 1: {
-                    ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost, Item_type_idItem_type,Barcode FROM dcaa_pos.items where Item_name like '" + Search + "'");
+                    ps = c.prepareStatement("SELECT SELECT idItems, Item_name, Description, Price,Cost,Barcode,Item_type_idItem_type FROM dcaa_pos.items where Item_name like '" + Search + "'");
                     rs = ps.executeQuery();
                     break;
                 }
                 case 2: {
-                    ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost, Item_type_idItem_type,Barcode FROM dcaa_pos.items where Description like '" + Search + "'");
+                    ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost,Barcode,Item_type_idItem_type FROM dcaa_pos.items where Description like '" + Search + "'");
                     rs = ps.executeQuery();
                     break;
                 }
                 default:
-                    ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost, Item_type_idItem_type,Barcode FROM dcaa_pos.items");
+                    ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost,Barcode,Item_type_idItem_type FROM dcaa_pos.items");
                     rs = ps.executeQuery();
                     break;
             }
@@ -319,7 +322,8 @@ public class Inventory_Controller implements Initializable {
                     }
                 }
                 System.out.println(rs.getString("Description"));
-                tableData.add(new Inventory_Data_Model(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), ItemType, rs.getString("Cost"), rs.getString("Barcode")));
+                tableData.add(new Inventory_Data_Model(rs.getString(1), rs.getString("Barcode"), rs.getString(2), rs.getString(3), rs.getString(4), ItemType, rs.getString("Cost")));
+                //(String ID, String Barcode, String Item_name, String Description, String Price, String ItemType, String Cost
                 System.out.println(rs.getString(1));
             }
 

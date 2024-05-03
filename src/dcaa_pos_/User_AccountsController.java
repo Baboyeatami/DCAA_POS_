@@ -85,6 +85,7 @@ public class User_AccountsController implements Initializable {
 
         data.add("Casher");
         data.add("Manager");
+        data.add("Card Loader");
 
         OptionsCombo.setItems(data);
         OptionsCombo.setValue("Select User Level");

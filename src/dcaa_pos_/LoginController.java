@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +23,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -47,6 +50,7 @@ public class LoginController implements Initializable {
     private PasswordField Password;
     POS_MainController POS_Main;
     MainController Main;
+    Student_CreditController S_Controller;
 
     /**
      * Initializes the controller class.
@@ -63,6 +67,7 @@ public class LoginController implements Initializable {
             Connection c = DBConnection.getConnection();
             PreparedStatement ps = c.prepareStatement("SELECT idusers,UserName,Password,usertype FROM dcaa_pos.users");
             ResultSet rs = ps.executeQuery();
+            boolean If_Last = false;
             while (rs.next()) {
 
                 if (rs.getString("UserName").equals(this.UserName.getText()) && rs.getString("Password").equals(this.Password.getText())) {
@@ -107,13 +112,47 @@ public class LoginController implements Initializable {
                         stage.setTitle("Main Window");
                         stage.setScene(new Scene(root1));
                         stage.show();
+                    } else if (rs.getString("usertype").equals("Card Loader")) {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/dcaa_pos_/Student_Credit.fxml"));
+                        Parent root1 = loader.load();
+                        S_Controller = loader.getController();
+                        S_Controller.setUserId(rs.getString("idusers"));
+                        S_Controller.Set_CardLoader();
+                        //Main.setUserId(rs.getString("idusers"));
+
+                        //System.out.println(Main.getUserId() + "login user id");
+                        Stage stage = new Stage();
+                        stage.initModality(Modality.WINDOW_MODAL);
+                        stage.initStyle(StageStyle.UNDECORATED);
+                        stage.setTitle("Main Window");
+                        stage.setScene(new Scene(root1));
+                        stage.show();
                     }
+
+                    If_Last = true;
+
+                } else {
+                    If_Last = false;
 
                 }
 
-                Stage close = (Stage) Login.getScene().getWindow();
-                close.close();
+            }
 
+            if (!If_Last) {
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Login");
+                alert.setHeaderText("Password or User Name Invalid");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    UserName.setText("");
+                    Password.clear();
+                    UserName.requestFocus();
+
+                } else {
+                    Stage close = (Stage) Login.getScene().getWindow();
+                    close.close();
+                }
             }
 
         } catch (SQLException ex) {

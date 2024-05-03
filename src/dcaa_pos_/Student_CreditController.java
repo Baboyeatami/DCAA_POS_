@@ -4,6 +4,7 @@ package dcaa_pos_;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
+import com.sun.applet2.preloader.event.UserDeclinedEvent;
 import dcaa_pos_.DBConnection;
 import dcaa_pos_.FXMLDocumentController;
 import dcaa_pos_.Inventory_Data_Model;
@@ -101,6 +102,16 @@ public class Student_CreditController implements Initializable {
     private Button BatchPosting;
     @FXML
     private Button C_Report;
+
+    String UserId;
+
+    public String getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(String UserId) {
+        this.UserId = UserId;
+    }
 
     /**
      * Initializes the controller class.
@@ -261,7 +272,7 @@ public class Student_CreditController implements Initializable {
                 String OR_Credit = "C" + String.format("%09d", Integer.parseInt(rs.getString(1)) + 1);
                 System.out.println(OR_Credit);
 
-                ps = c.prepareStatement("Insert into credit_history (StudentID, Credit, createtime, userID, Transaction_type, OR_,NFC_Card_No)values ('" + Data + "','" + AddCredit_.getText() + "','" + timeStamp + "','" + 1 + "','credit','" + OR_Credit + "','" + NFC_Card_No + "') ");
+                ps = c.prepareStatement("Insert into credit_history (StudentID, Credit, createtime, userID, Transaction_type, OR_,NFC_Card_No)values ('" + Data + "','" + AddCredit_.getText() + "','" + timeStamp + "','" + this.getUserId() + "','credit','" + OR_Credit + "','" + NFC_Card_No + "') ");
                 if (!ps.execute()) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Student Credit ");
@@ -448,5 +459,9 @@ public class Student_CreditController implements Initializable {
             Logger.getLogger(MainController.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    void Set_CardLoader() {
+        Update_menu.setDisable(true);
     }
 }
