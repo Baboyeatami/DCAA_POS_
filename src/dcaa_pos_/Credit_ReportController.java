@@ -250,7 +250,8 @@ public class Credit_ReportController implements Initializable {
 // Convert LocalDate to java.sql.Date
             Date sqlDateFrom = Date.valueOf(selectedDateFrom);
             Date sqlDateTo = Date.valueOf(selectedDateTo);
-
+            System.out.println(sqlDateFrom);
+            System.out.println(sqlDateTo);
             DBConnection.init();
 
             Connection c = DBConnection.getConnection();
@@ -266,39 +267,31 @@ public class Credit_ReportController implements Initializable {
                 switch (this.ComboSearch.getSelectionModel().getSelectedIndex()) {
                     case 0:
                         ps = c.prepareStatement("SELECT * FROM dcaa_pos.credit_history where OR_ like '" + Search + "' AND createtime BETWEEN ? AND ? ");
-                        ps.setDate(1, sqlDateFrom);
-                        ps.setDate(2, sqlDateTo);
-                        rs = ps.executeQuery();
 
                         break;
                     case 1:
                         ps = c.prepareStatement("SELECT * FROM dcaa_pos.credit_history where StudentID like '" + Search + "' AND createtime BETWEEN ? AND ? ");
-                        ps.setDate(1, sqlDateFrom);
-                        ps.setDate(2, sqlDateTo);
-                        rs = ps.executeQuery();
+
                         break;
                     case 2:
-                        ps = c.prepareStatement("SELECT * FROM dcaa_pos.credit_history where Transaction_type like '" + Search + "' AND createtime BETWEEN ? AND ? ");
-                        ps.setDate(1, sqlDateFrom);
-                        ps.setDate(2, sqlDateTo);
-                        rs = ps.executeQuery();
+                        ps = c.prepareStatement("SELECT * FROM dcaa_pos.credit_history where  createtime BETWEEN '" + sqlDateFrom.toString() + "' AND '" + sqlDateTo.toString() + "'  AND Transaction_type like '" + Search + "'  ");
+                        System.out.println("Case 2");
                         break;
                     case 3:
                         ps = c.prepareStatement("SELECT * FROM dcaa_pos.credit_history where userID like '" + Search + "' AND createtime BETWEEN ? AND ? ");
-                        ps.setDate(1, sqlDateFrom);
-                        ps.setDate(2, sqlDateTo);
-                        rs = ps.executeQuery();
+
                         break;
                     default:
                         ps = c.prepareStatement("SELECT * FROM dcaa_pos.credit_history where OR_ like '" + Search + "' AND createtime BETWEEN ? AND ? ");
-                        ps.setDate(1, sqlDateFrom);
-                        ps.setDate(2, sqlDateTo);
-                        rs = ps.executeQuery();
+
                         break;
                 }
 
                 String Name_ = null;
+
+                rs = ps.executeQuery();
                 while (rs.next()) {
+                    System.out.println(rs.getString("OR_") + "  hahahah");
                     PreparedStatement ps1 = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID FROM dcaa_pos.student_info where Student_ID='" + rs.getString("StudentID") + "' ");
 
                     ResultSet rs1 = ps1.executeQuery();

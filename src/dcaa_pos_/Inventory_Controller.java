@@ -294,7 +294,7 @@ public class Inventory_Controller implements Initializable {
                     break;
                 }
                 case 1: {
-                    ps = c.prepareStatement("SELECT SELECT idItems, Item_name, Description, Price,Cost,Barcode,Item_type_idItem_type FROM dcaa_pos.items where Item_name like '" + Search + "'");
+                    ps = c.prepareStatement("SELECT idItems, Item_name, Description, Price,Cost,Barcode,Item_type_idItem_type FROM dcaa_pos.items where Item_name like '" + Search + "'");
                     rs = ps.executeQuery();
                     break;
                 }

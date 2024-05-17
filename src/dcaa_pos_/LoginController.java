@@ -130,6 +130,9 @@ public class LoginController implements Initializable {
                     }
 
                     If_Last = true;
+                    Stage close = (Stage) Login.getScene().getWindow();
+                    close.close();
+                    break;
 
                 } else {
                     If_Last = false;

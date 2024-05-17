@@ -49,7 +49,6 @@ import javax.smartcardio.CardTerminals;
 import javax.smartcardio.CommandAPDU;
 import javax.smartcardio.ResponseAPDU;
 import javax.smartcardio.TerminalFactory;
-import org.opencv.core.Mat;
 
 /**
  * FXML Controller class

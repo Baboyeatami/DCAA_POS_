@@ -4,15 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Jamie/Documents/NetBeansProjects/DCAA_POS_/src/dcaa_pos_/Credit_ReportController.java</file>
+            <file>file:/C:/Users/Jamie/Documents/NetBeansProjects/DCAA_POS_/src/dcaa_pos_/Student_infoController.java</file>
             <file>file:/C:/Users/Jamie/Documents/NetBeansProjects/DCAA_POS_/src/dcaa_pos_/POS_MainController.java</file>
-            <file>file:/C:/Users/Jamie/Documents/NetBeansProjects/DCAA_POS_/src/dcaa_pos_/POS_ReadBarcode.fxml</file>
             <file>file:/C:/Users/Jamie/Documents/NetBeansProjects/DCAA_POS_/src/dcaa_pos_/_Add_itemListController.java</file>
             <file>file:/C:/Users/Jamie/Documents/NetBeansProjects/DCAA_POS_/src/dcaa_pos_/POS_ReadBarcode.java</file>
-            <file>file:/C:/Users/Jamie/Documents/NetBeansProjects/DCAA_POS_/src/dcaa_pos_/Student_CreditController.java</file>
             <file>file:/C:/Users/Jamie/Documents/NetBeansProjects/DCAA_POS_/src/dcaa_pos_/LoginController.java</file>
             <file>file:/C:/Users/Jamie/Documents/NetBeansProjects/DCAA_POS_/src/dcaa_pos_/DCAA_POS_.java</file>
             <file>file:/C:/Users/Jamie/Documents/NetBeansProjects/DCAA_POS_/src/dcaa_pos_/Inventory_Controller.java</file>
-            <file>file:/C:/Users/Jamie/Documents/NetBeansProjects/DCAA_POS_/src/dcaa_pos_/Inventory_Data_Model.java</file>
         </group>
     </open-files>
 </project-private>
