@@ -41,8 +41,13 @@
             <TextField fx:id="Search" layoutX="137.0" layoutY="26.0" onAction="#LoadSearch" prefHeight="33.0" prefWidth="226.0" promptText="Search All" />
             <ButtonBar layoutX="23.0" layoutY="375.0" prefHeight="70.0" prefWidth="773.0">
               <buttons>
-                  <Button fx:id="LoadDebit" layoutX="697.0" layoutY="18.0" mnemonicParsing="false" onAction="#LoadDebit" prefHeight="38.0" text="Load Search" />
+                  <Label fx:id="sum_Credit" prefHeight="17.0" prefWidth="307.0">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
                   <Button fx:id="Print" layoutX="697.0" layoutY="18.0" mnemonicParsing="false" onAction="#Print" prefHeight="37.0" text="Print Credit Report" />
+                  <Button fx:id="LoadDebit" layoutX="697.0" layoutY="18.0" mnemonicParsing="false" onAction="#LoadDebit" prefHeight="38.0" text="Load Search" />
                   <Button fx:id="Close" layoutX="697.0" layoutY="18.0" mnemonicParsing="false" onAction="#Close" prefHeight="35.0" text="Close" />
               </buttons>
             </ButtonBar>

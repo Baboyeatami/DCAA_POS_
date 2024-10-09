@@ -72,12 +72,15 @@ public class MainController implements Initializable {
     @FXML
     AnchorPane main;
     POS_MainController pos_main;
+    Common_Card_inquiryController Card_inquiry;
     TimeUpdateTask timeUpdateTask;
     private volatile boolean stop = false;
     @FXML
     private Menu Close;
     @FXML
     private MenuItem Log_out_;
+    @FXML
+    private Button Card_Inquiry;
 
     public String getUserId() {
         return UserId;
@@ -334,6 +337,28 @@ public class MainController implements Initializable {
         User_Accounts.setDisable(true);
         Student.setDisable(true);
         StudentCreit.setDisable(true);
+
+    }
+
+    @FXML
+    private void Card_Inquiry(ActionEvent event) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dcaa_pos_/Common_Card_inquiry.fxml"));
+            Parent root1 = loader.load();
+            Card_inquiry = loader.getController();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setTitle("POS Main Window");
+            stage.setScene(new Scene(root1));
+            stage.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(Inventory_Controller.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 

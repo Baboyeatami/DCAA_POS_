@@ -8,6 +8,7 @@ package dcaa_pos_;
 import com.sun.applet2.preloader.event.UserDeclinedEvent;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -752,6 +753,7 @@ public class POS_MainController implements Initializable {
                     Mode_label.setText("Mode: Select Item to continue..");
                     Items_Label.setText("");
                     Student_Id.setText("");
+                    Clear_imageData();
                 }
 
             } else {
@@ -1627,6 +1629,8 @@ public class POS_MainController implements Initializable {
                 Items_Label.setText("");
                 Student_Id.setText("");
                 Scan_NFC.setText("Scan Card");
+                Clear_imageData();
+                StudentCredit.setText("");
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -1808,6 +1812,25 @@ public class POS_MainController implements Initializable {
             stage.setScene(new Scene(root1));
             stage.show();
         } catch (IOException ex) {
+            Logger.getLogger(POS_MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    void Clear_imageData() {
+        try {
+            //Blob blob = rs.getBlob("image_data");
+            InputStream inputStream;
+            Image image;
+
+            File file = new File(System.getProperty("user.dir") + "\\no-avatar.png");
+
+            inputStream = new FileInputStream(file);
+            image = new Image(inputStream);  // Replace with the actual path to your .png file
+
+            Imageview.setImage(image);
+            StudentCredit.setText("");
+            LabelName.setText("");
+        } catch (FileNotFoundException ex) {
             Logger.getLogger(POS_MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -28,6 +28,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -79,6 +80,8 @@ public class Credit_ReportController implements Initializable {
     private DatePicker DateFrom;
     @FXML
     private DatePicker DateTo;
+    @FXML
+    private Label sum_Credit;
 
     /**
      * Initializes the controller class.
@@ -190,40 +193,41 @@ public class Credit_ReportController implements Initializable {
 
             switch (this.ComboSearch.getSelectionModel().getSelectedIndex()) {
                 case 0:
-                    ps = c.prepareStatement("SELECT * FROM dcaa_pos.credit_history where OR_ like '" + Search + "'");
+                    ps = c.prepareStatement("SELECT StudentID, Credit,Transaction_type, OR_,(SELECT SUM(Credit) FROM credit_history WHERE Transaction_type = 'credit') as sum_,createtime   FROM dcaa_pos.credit_history where OR_ like '" + Search + "'");
                     rs = ps.executeQuery();
                     break;
                 case 1:
-                    ps = c.prepareStatement("SELECT * FROM dcaa_pos.credit_history where StudentID like '" + Search + "'");
+                    ps = c.prepareStatement("SELECT StudentID, Credit,Transaction_type, OR_,(SELECT SUM(Credit) FROM credit_history WHERE Transaction_type = 'credit') as sum_,createtime  FROM dcaa_pos.credit_history where StudentID like '" + Search + "'");
                     rs = ps.executeQuery();
                     break;
                 case 2:
-                    ps = c.prepareStatement("SELECT * FROM dcaa_pos.credit_history where Transaction_type like '" + Search + "'");
+                    ps = c.prepareStatement("SELECT StudentID, Credit,Transaction_type, OR_, (SELECT SUM(Credit) FROM credit_history WHERE Transaction_type = 'credit') as sum_,createtime  FROM dcaa_pos.credit_history where Transaction_type like '" + Search + "'");
                     rs = ps.executeQuery();
                     break;
                 case 3:
-                    ps = c.prepareStatement("SELECT * FROM dcaa_pos.credit_history where userID like '" + Search + "'");
+                    ps = c.prepareStatement("SELECT StudentID, Credit,Transaction_type, OR_,  (SELECT SUM(Credit) FROM credit_history WHERE Transaction_type = 'credit') as sum_,createtime  FROM dcaa_pos.credit_history where userID like '" + Search + "'");
                     rs = ps.executeQuery();
                     break;
                 default:
-                    ps = c.prepareStatement("SELECT * FROM dcaa_pos.credit_history where OR_ like '" + Search + "'");
+                    ps = c.prepareStatement("SELECT  StudentID, Credit,Transaction_type, OR_, (SELECT SUM(Credit) FROM credit_history WHERE Transaction_type = 'credit') as sum_,createtime FROM dcaa_pos.credit_history where OR_ like '" + Search + "'");
                     rs = ps.executeQuery();
                     break;
             }
             String Name_ = null;
+            String Amount = null;
             while (rs.next()) {
                 PreparedStatement ps1 = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID FROM dcaa_pos.student_info where Student_ID='" + rs.getString("StudentID") + "' ");
                 ResultSet rs1 = ps1.executeQuery();
-                if (rs1.next()) {
+                while (rs1.next()) {
                     Name_ = rs1.getString("L_Name") + ", " + rs1.getString("F_Name") + " " + rs1.getString("M_Name");
                 }
                 ps1.close();
                 tableDataTransaction.add(new CRDataModel(rs.getString("OR_"), rs.getString("StudentID"), Name_, rs.getString("Credit"), rs.getString("createtime"), rs.getString("Transaction_type")));
-
+                Amount = rs.getString("sum_");
             }
 
             TableCredit.setItems(tableDataTransaction);
-
+            sum_Credit.setText("Total:" + Amount);
             c.close();
             ps.close();
 
@@ -266,45 +270,45 @@ public class Credit_ReportController implements Initializable {
 
                 switch (this.ComboSearch.getSelectionModel().getSelectedIndex()) {
                     case 0:
-                        ps = c.prepareStatement("SELECT * FROM dcaa_pos.credit_history where OR_ like '" + Search + "' AND createtime BETWEEN ? AND ? ");
+                        ps = c.prepareStatement("SELECT StudentID, Credit,Transaction_type, OR_,(SELECT SUM(Credit) as sum_ FROM credit_history WHERE Transaction_type = 'credit') as sum_,createtime  FROM dcaa_pos.credit_history where OR_ like '" + Search + "' AND createtime BETWEEN ? AND ? ");
 
                         break;
                     case 1:
-                        ps = c.prepareStatement("SELECT * FROM dcaa_pos.credit_history where StudentID like '" + Search + "' AND createtime BETWEEN ? AND ? ");
+                        ps = c.prepareStatement("SELECT StudentID, Credit,Transaction_type, OR_,(SELECT SUM(Credit) FROM credit_history WHERE Transaction_type = 'credit') as sum_,createtime  FROM dcaa_pos.credit_history where StudentID like '" + Search + "' AND createtime BETWEEN ? AND ? ");
 
                         break;
                     case 2:
-                        ps = c.prepareStatement("SELECT * FROM dcaa_pos.credit_history where  createtime BETWEEN '" + sqlDateFrom.toString() + "' AND '" + sqlDateTo.toString() + "'  AND Transaction_type like '" + Search + "'  ");
+                        ps = c.prepareStatement("SELECT StudentID, Credit,Transaction_type, OR_,(SELECT SUM(Credit) FROM credit_history WHERE createtime BETWEEN '" + sqlDateFrom.toString() + "' AND '" + sqlDateTo.toString() + "'  AND Transaction_type like '" + Search + "') as sum_,createtime  FROM dcaa_pos.credit_history where  createtime BETWEEN '" + sqlDateFrom.toString() + "' AND '" + sqlDateTo.toString() + "'  AND Transaction_type like '" + Search + "'  ");
                         System.out.println("Case 2");
                         break;
                     case 3:
-                        ps = c.prepareStatement("SELECT * FROM dcaa_pos.credit_history where userID like '" + Search + "' AND createtime BETWEEN ? AND ? ");
+                        ps = c.prepareStatement("SELECT StudentID, Credit,Transaction_type, OR_,(SELECT SUM(Credit) FROM credit_history WHERE Transaction_type = 'credit') as sum_,createtime  FROM dcaa_pos.credit_history where userID like '" + Search + "' AND createtime BETWEEN ? AND ? ");
 
                         break;
                     default:
-                        ps = c.prepareStatement("SELECT * FROM dcaa_pos.credit_history where OR_ like '" + Search + "' AND createtime BETWEEN ? AND ? ");
+                        ps = c.prepareStatement("SELECT StudentID, Credit,Transaction_type, OR_,(SELECT SUM(Credit) FROM credit_history WHERE Transaction_type = 'credit') as sum_,createtime  FROM dcaa_pos.credit_history where OR_ like '" + Search + "' AND createtime BETWEEN ? AND ? ");
 
                         break;
                 }
 
                 String Name_ = null;
-
+                String Amount = null;
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    System.out.println(rs.getString("OR_") + "  hahahah");
+                    //System.out.println(rs.getString("OR_") + "  hahahah");
                     PreparedStatement ps1 = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID FROM dcaa_pos.student_info where Student_ID='" + rs.getString("StudentID") + "' ");
 
                     ResultSet rs1 = ps1.executeQuery();
-                    if (rs1.next()) {
+                    while (rs1.next()) {
                         Name_ = rs1.getString("L_Name") + ", " + rs1.getString("F_Name") + " " + rs1.getString("M_Name");
                     }
-                    ps1.close();
+                    //ps1.close();
                     tableDataTransaction.add(new CRDataModel(rs.getString("OR_"), rs.getString("StudentID"), Name_, rs.getString("Credit"), rs.getString("createtime"), rs.getString("Transaction_type")));
-
+                    Amount = rs.getString("sum_");
                 }
 
                 TableCredit.setItems(tableDataTransaction);
-
+                sum_Credit.setText("Total:" + Amount);
                 c.close();
                 ps.close();
 
@@ -353,7 +357,7 @@ public class Credit_ReportController implements Initializable {
             //String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 
             m.put("parameter1", sqlDateFrom.toString());
-            m.put("parameter2", sqlDateFrom.toString());
+            m.put("parameter2", sqlDateTo.toString());
 
             JP = JasperFillManager.fillReport(JR, m, DBConnection.getConnection());
 

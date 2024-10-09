@@ -39,6 +39,7 @@
             <Button fx:id="Student" layoutX="201.0" layoutY="13.0" mnemonicParsing="false" onAction="#Add_Student" text="Add Student" />
             <Button fx:id="StudentCreit" mnemonicParsing="false" onAction="#OpenCreditHistory" text="Student Credit" />
             <Button fx:id="Sales_Invoice" mnemonicParsing="false" onAction="#Open_Sales_invoice" text="Sales Invoice" />
+            <Button fx:id="Card_Inquiry" layoutX="483.0" layoutY="13.0" mnemonicParsing="false" onAction="#Card_Inquiry" text="Common Card Inquiry " />
             </items>
         </ToolBar>
         <AnchorPane layoutX="-1.0" layoutY="67.0" prefHeight="593.0" prefWidth="1094.0">
