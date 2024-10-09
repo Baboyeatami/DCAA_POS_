@@ -47,7 +47,7 @@ Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\dist\image.png"; De
 Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\dist\no-avatar.png"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\dist\opencv_java3416.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\lib\*"; DestDir: "{app}\lib"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\dist\reports\*"; DestDir: "{app}\reports "; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\dist\reports\*"; DestDir: "{app}\reports"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
