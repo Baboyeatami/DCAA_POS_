@@ -187,30 +187,33 @@ public class Credit_ReportController implements Initializable {
         String Search = "%" + this.Search.getText() + "%";
 
         PreparedStatement ps;
+        PreparedStatement Total_ps;
         ResultSet rs = null;
+        ResultSet Total_rs;
         tableDataTransaction.clear();
         try {
 
             switch (this.ComboSearch.getSelectionModel().getSelectedIndex()) {
                 case 0:
-                    ps = c.prepareStatement("SELECT StudentID, Credit,Transaction_type, OR_,(SELECT SUM(Credit) FROM credit_history WHERE Transaction_type = 'credit') as sum_,createtime   FROM dcaa_pos.credit_history where OR_ like '" + Search + "'");
+                    ps = c.prepareStatement("SELECT StudentID, Credit,Transaction_type, OR_,(SELECT SUM(Credit) FROM credit_history WHERE Transaction_type = 'credit' and OR_ like '" + Search + "') as sum_,createtime   FROM dcaa_pos.credit_history where OR_ like '" + Search + "'");
                     rs = ps.executeQuery();
                     break;
                 case 1:
-                    ps = c.prepareStatement("SELECT StudentID, Credit,Transaction_type, OR_,(SELECT SUM(Credit) FROM credit_history WHERE Transaction_type = 'credit') as sum_,createtime  FROM dcaa_pos.credit_history where StudentID like '" + Search + "'");
+                    ps = c.prepareStatement("SELECT StudentID, Credit,Transaction_type, OR_,(SELECT SUM(Credit) FROM credit_history WHERE Transaction_type = 'credit'and StudentID like '" + Search + "') as sum_,createtime  FROM dcaa_pos.credit_history where StudentID like '" + Search + "'");
                     rs = ps.executeQuery();
                     break;
                 case 2:
-                    ps = c.prepareStatement("SELECT StudentID, Credit,Transaction_type, OR_, (SELECT SUM(Credit) FROM credit_history WHERE Transaction_type = 'credit') as sum_,createtime  FROM dcaa_pos.credit_history where Transaction_type like '" + Search + "'");
+                    ps = c.prepareStatement("SELECT StudentID, Credit,Transaction_type, OR_, (SELECT SUM(Credit) FROM credit_history WHERE Transaction_type = 'credit'and Transaction_type like '" + Search + "' ) as sum_,createtime  FROM dcaa_pos.credit_history where Transaction_type like '" + Search + "'");
                     rs = ps.executeQuery();
                     break;
                 case 3:
-                    ps = c.prepareStatement("SELECT StudentID, Credit,Transaction_type, OR_,  (SELECT SUM(Credit) FROM credit_history WHERE Transaction_type = 'credit') as sum_,createtime  FROM dcaa_pos.credit_history where userID like '" + Search + "'");
+                    ps = c.prepareStatement("SELECT StudentID, Credit,Transaction_type, OR_,  (SELECT SUM(Credit) FROM credit_history WHERE Transaction_type = 'credit' and userId like '" + Search + "' ) as sum_,createtime  FROM dcaa_pos.credit_history where userID like '" + Search + "'");
                     rs = ps.executeQuery();
                     break;
                 default:
-                    ps = c.prepareStatement("SELECT  StudentID, Credit,Transaction_type, OR_, (SELECT SUM(Credit) FROM credit_history WHERE Transaction_type = 'credit') as sum_,createtime FROM dcaa_pos.credit_history where OR_ like '" + Search + "'");
+                    ps = c.prepareStatement("SELECT  StudentID, Credit,Transaction_type, OR_, (SELECT SUM(Credit) FROM credit_history WHERE Transaction_type = 'credit' and OR_ like '" + Search + "' ) as sum_,createtime FROM dcaa_pos.credit_history where OR_ like '" + Search + "'");
                     rs = ps.executeQuery();
+
                     break;
             }
             String Name_ = null;

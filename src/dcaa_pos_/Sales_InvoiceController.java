@@ -102,6 +102,7 @@ public class Sales_InvoiceController implements Initializable {
         data.add("Student Id");
         data.add("OR Number");
         data.add("Item Code");
+        data.add("User ID ");
 
         combo.setItems(data);
         //OptionsCombo.setValue("Select User Level");
@@ -175,6 +176,10 @@ public class Sales_InvoiceController implements Initializable {
                 ps = c.prepareStatement("SELECT  Item_name, quantity, price, subTotal, OR_, StudentID,date FROM dcaa_pos.invoice where Item_name like '" + Search + "'  order by date DESC");
                 ps_sum = c.prepareStatement("SELECT sum(subTotal) as total  FROM  dcaa_pos.invoice where Item_name ='" + search.getText() + "'");
 
+            } else if (combo.getSelectionModel().getSelectedIndex() == 3) {
+                ps = c.prepareStatement("SELECT  Item_name, quantity, price, subTotal, OR_, StudentID,date FROM dcaa_pos.invoice where user_id like '" + Search + "'  order by date DESC");
+                ps_sum = c.prepareStatement("SELECT sum(subTotal) as total  FROM  dcaa_pos.invoice where user_id ='" + search.getText() + "'");
+
             }
 
             rs = ps.executeQuery();
@@ -195,7 +200,7 @@ public class Sales_InvoiceController implements Initializable {
 
             if (rs_sum.next()) {
                 System.out.println(rs_sum.getString("total") + "  sum");
-                double amount = 0;
+                double amount;
                 if (rs_sum.getString(1) == null) {
                     amount = 0;
                 } else {

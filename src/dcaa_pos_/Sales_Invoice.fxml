@@ -30,7 +30,6 @@
             <ButtonBar layoutX="11.0" layoutY="550.0" prefHeight="74.0" prefWidth="989.0">
               <buttons>
                 <Button fx:id="refresh" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="73.0" mnemonicParsing="false" onAction="#Refresh" prefHeight="52.0" prefWidth="70.0" text="Refresh" />
-                  <Button layoutX="561.0" layoutY="18.0" minWidth="41.0" mnemonicParsing="false" prefHeight="52.0" text="Print Selected" />
                   <Button fx:id="LoadData" layoutX="666.0" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="73.0" mnemonicParsing="false" onAction="#Load_Data_day" prefHeight="51.0" prefWidth="256.0" text="Load Data" />
                   <Button fx:id="Btn_close" layoutX="539.0" layoutY="22.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="73.0" mnemonicParsing="false" onAction="#Close_Sales_invoice" prefHeight="52.0" prefWidth="70.0" text="Close" />
               </buttons>

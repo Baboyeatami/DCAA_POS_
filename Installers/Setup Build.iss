@@ -5,7 +5,7 @@
 #define MyAppVersion "1.0"
 #define MyAppPublisher "https://www.facebook.com/dcaai/"
 #define MyAppURL "https://www.facebook.com/dcaai/"
-#define MyAppExeName "DCAA POS.exe"
+#define MyAppExeName "DCAA_POS.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -24,7 +24,7 @@ DisableProgramGroupPage=yes
 ;PrivilegesRequired=lowest
 OutputDir=C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\Installers
 OutputBaseFilename=DCAA Point of Sales System 
-SetupIconFile=C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\dist\DCAA_Logo.ico
+SetupIconFile=C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\DCAA POS V 0.4.2.6\DCAA_Logo.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -36,18 +36,17 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\dist\DCAA POS.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\dist\config.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\dist\DCAA POS.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\dist\DCAA_Logo.ico"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\dist\DCAA_POS_.html"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\dist\DCAA_POS_.jar"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\dist\DCAA_POS_.jnlp"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\dist\image.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\dist\no-avatar.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\dist\opencv_java3416.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\DCAA POS V 0.4.2.6\DCAA_POS.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\DCAA POS V 0.4.2.6\DCAA_POS.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\DCAA POS V 0.4.2.6\DCAA_Logo.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\DCAA POS V 0.4.2.6\DCAA_POS_.html"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\DCAA POS V 0.4.2.6\DCAA_POS_.jar"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\DCAA POS V 0.4.2.6\DCAA_POS_.jnlp"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\DCAA POS V 0.4.2.6\image.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\DCAA POS V 0.4.2.6\no-avatar.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\DCAA POS V 0.4.2.6\opencv_java3416.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\lib\*"; DestDir: "{app}\lib"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\dist\reports\*"; DestDir: "{app}\reports"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\Jamie\Documents\NetBeansProjects\DCAA_POS_\DCAA POS V 0.4.2.6\reports\*"; DestDir: "{app}\reports"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
