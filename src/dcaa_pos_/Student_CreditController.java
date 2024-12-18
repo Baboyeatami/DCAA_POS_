@@ -104,6 +104,10 @@ public class Student_CreditController implements Initializable {
     private Button C_Report;
 
     String UserId;
+    @FXML
+    private Button CommonCard;
+
+    Common_Card_inquiryController Card_inquiry;
 
     public String getUserId() {
         return UserId;
@@ -463,5 +467,27 @@ public class Student_CreditController implements Initializable {
 
     void Set_CardLoader() {
         Update_menu.setDisable(true);
+    }
+
+    @FXML
+    private void CommonCard(ActionEvent event) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dcaa_pos_/Common_Card_inquiry.fxml"));
+            Parent root1 = loader.load();
+            Card_inquiry = loader.getController();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setTitle("POS Main Window");
+            stage.setScene(new Scene(root1));
+            stage.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(Inventory_Controller.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }
