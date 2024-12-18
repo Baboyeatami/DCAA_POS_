@@ -4,8 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Jamie/Documents/NetBeansProjects/DCAA_POS_/src/dcaa_pos_/Credit_ReportController.java</file>
+            <file>file:/C:/Users/Jamie/Documents/NetBeansProjects/DCAA_POS_/src/dcaa_pos_/BatchPostingDataModel.java</file>
             <file>file:/C:/Users/Jamie/Documents/NetBeansProjects/DCAA_POS_/src/dcaa_pos_/Sales_InvoiceController.java</file>
+            <file>file:/C:/Users/Jamie/Documents/NetBeansProjects/DCAA_POS_/src/dcaa_pos_/MainController.java</file>
             <file>file:/C:/Users/Jamie/Documents/NetBeansProjects/DCAA_POS_/src/dcaa_pos_/Student_CreditController.java</file>
+            <file>file:/C:/Users/Jamie/Documents/NetBeansProjects/DCAA_POS_/src/dcaa_pos_/Student_dataModel.java</file>
+            <file>file:/C:/Users/Jamie/Documents/NetBeansProjects/DCAA_POS_/src/dcaa_pos_/BatchPostingCredit_Controller.java</file>
         </group>
     </open-files>
 </project-private>
