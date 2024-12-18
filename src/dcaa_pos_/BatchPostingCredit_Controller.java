@@ -71,6 +71,10 @@ public class BatchPostingCredit_Controller implements Initializable {
     private MenuItem RemovedEntry;
     @FXML
     private Button Clear;
+    @FXML
+    private TableColumn<Student_dataModel, String> L_Name1;
+    @FXML
+    private TableColumn<BatchPostingDataModel, String> Amount_1;
 
     /**
      * Initializes the controller class.
@@ -79,9 +83,11 @@ public class BatchPostingCredit_Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         L_StudentID.setCellValueFactory(new PropertyValueFactory<>("StudentName"));
         L_Name.setCellValueFactory(new PropertyValueFactory<>("StudentID"));
+        L_Name1.setCellValueFactory(new PropertyValueFactory<>("NFC_Card_No"));
         B_Name.setCellValueFactory(new PropertyValueFactory<>("StudentName"));
         B_TableID.setCellValueFactory(new PropertyValueFactory<>("StudentID"));
         Amount_.setCellValueFactory(new PropertyValueFactory<>("Amount"));
+        Amount_1.setCellValueFactory(new PropertyValueFactory<>("NFC_Card_No"));
         loadcombo_data();
         loaddata();
     }
@@ -99,11 +105,11 @@ public class BatchPostingCredit_Controller implements Initializable {
         PreparedStatement ps;
         tableStudent.clear();
         try {
-            ps = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID FROM dcaa_pos.student_info");
+            ps = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID,NFC_Card_No FROM dcaa_pos.student_info");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                tableStudent.add(new Student_dataModel(rs.getString("Student_ID"), rs.getString("L_Name") + ", " + rs.getString("F_Name") + " " + rs.getString("M_Name")));
-                System.out.println(rs.getString("Student_ID"));
+                tableStudent.add(new Student_dataModel(rs.getString("Student_ID"), rs.getString("L_Name") + ", " + rs.getString("F_Name") + " " + rs.getString("M_Name"), rs.getString("NFC_Card_No")));
+                System.out.println(rs.getString("Student_ID") + rs.getString("NFC_Card_No") + "haha");
             }
 
             Name_table.setItems(tableStudent);
@@ -126,9 +132,9 @@ public class BatchPostingCredit_Controller implements Initializable {
         System.out.println(item);
         TableColumn col = pos.getTableColumn();
         String Data = (String) col.getCellObservableValue(item).getValue();
-        System.out.println(Data);
+
         Student_dataModel model = tableStudent.get(row);
-        System.out.println(model.getStudentID() + " " + model.getStudentName());
+        System.out.println(model.getStudentID() + " " + model.getStudentName() + " " + model.getNFC_Card_No());
         String Amount_ = Amount.getText();
 
         if (Amount_.isEmpty()) {
@@ -146,7 +152,8 @@ public class BatchPostingCredit_Controller implements Initializable {
             // Show the alert box
             alert.showAndWait();
         } else if (Amount_.matches("-?\\d+(\\.\\d+)?")) {
-            tableDataBatchPosting.add(new BatchPostingDataModel(model.getStudentID(), model.getStudentName(), Double.parseDouble(Amount.getText())));
+            tableDataBatchPosting.add(new BatchPostingDataModel(model.getStudentID(), model.getStudentName(), Double.parseDouble(Amount.getText()), model.getNFC_Card_No()));
+            System.out.println(tableDataBatchPosting.get(0).getNFC_Card_No());
             BatchPostingTable.setItems(tableDataBatchPosting);
 
         } else {
@@ -176,11 +183,11 @@ public class BatchPostingCredit_Controller implements Initializable {
                     if (rs.next()) {
                         String OR_Credit = "C" + String.format("%09d", Integer.parseInt(rs.getString(1)) + 1);
                         System.out.println(OR_Credit);
-
+                        System.out.println(tableDataBatchPosting.get(i).getNFC_Card_No() + "card pota");
                         BatchPostingDataModel post = tableDataBatchPosting.get(i);
-                        ps = c.prepareStatement("Insert into credit_history (StudentID, Credit, createtime, userID, Transaction_type, OR_)values ('" + post.StudentID + "','" + post.getAmount() + "','" + timeStamp + "','" + 1 + "','credit','" + OR_Credit + "') ");
+                        ps = c.prepareStatement("Insert into credit_history (StudentID, Credit, createtime, userID, Transaction_type, OR_,NFC_Card_No)values ('" + post.StudentID + "','" + post.getAmount() + "','" + timeStamp + "','" + 1 + "','credit','" + OR_Credit + "','" + tableDataBatchPosting.get(i).getNFC_Card_No() + "') ");
                         if (!ps.execute()) {
-                            System.out.println("Posted " + post.StudentID + " " + post.getAmount());
+                            System.out.println("Posted " + post.StudentID + " " + post.getAmount() + tableDataBatchPosting.get(i).getNFC_Card_No() + "wew");
                             status = true;
                         } else {
                             System.out.println("Not Posted" + post.getStudentID() + " " + post.getAmount());
@@ -243,29 +250,29 @@ public class BatchPostingCredit_Controller implements Initializable {
 
             switch (this.select.getSelectionModel().getSelectedIndex()) {
                 case 0:
-                    ps = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID FROM dcaa_pos.student_info where Student_ID like '" + Search + "'");
+                    ps = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID,NFC_Card_No FROM dcaa_pos.student_info where Student_ID like '" + Search + "'");
                     rs = ps.executeQuery();
                     break;
                 case 1:
-                    ps = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID FROM dcaa_pos.student_info where L_Name like '" + Search + "'");
+                    ps = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID,NFC_Card_No FROM dcaa_pos.student_info where L_Name like '" + Search + "'");
                     rs = ps.executeQuery();
                     break;
                 case 2:
-                    ps = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID FROM dcaa_pos.student_info where F_name like '" + Search + "'");
+                    ps = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID,NFC_Card_No FROM dcaa_pos.student_info where F_name like '" + Search + "'");
                     rs = ps.executeQuery();
                     break;
                 case 3:
-                    ps = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID FROM dcaa_pos.student_info where M_name like '" + Search + "'");
+                    ps = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID,NFC_Card_No FROM dcaa_pos.student_info where M_name like '" + Search + "'");
                     rs = ps.executeQuery();
                     break;
                 default:
-                    ps = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID FROM dcaa_pos.student_info");
+                    ps = c.prepareStatement("SELECT  F_name, M_name, L_Name, Student_ID,NFC_Card_No FROM dcaa_pos.student_info");
                     rs = ps.executeQuery();
                     break;
             }
 
             while (rs.next()) {
-                tableStudent.add(new Student_dataModel(rs.getString("Student_ID"), rs.getString("L_Name") + ", " + rs.getString("F_Name") + " " + rs.getString("M_Name")));
+                tableStudent.add(new Student_dataModel(rs.getString("Student_ID"), rs.getString("L_Name") + ", " + rs.getString("F_Name") + " " + rs.getString("M_Name"), rs.getString("NFC_Card_No")));
                 System.out.println(rs.getString("Student_ID"));
             }
 

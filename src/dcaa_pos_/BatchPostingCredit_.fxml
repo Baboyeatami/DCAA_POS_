@@ -18,8 +18,9 @@
          <children>
             <TableView fx:id="Name_table" layoutX="6.0" layoutY="98.0" prefHeight="403.0" prefWidth="406.0">
               <columns>
-                <TableColumn fx:id="L_StudentID" prefWidth="170.0" text="Student ID" />
-                <TableColumn fx:id="L_Name" prefWidth="231.0" text="Name" />
+                <TableColumn fx:id="L_StudentID" prefWidth="203.0" text="Student ID" />
+                <TableColumn fx:id="L_Name" prefWidth="205.0" text="Name" />
+                  <TableColumn fx:id="L_Name1" prefWidth="205.0" text="Card" />
               </columns>
                <contextMenu>
                   <ContextMenu>
@@ -45,6 +46,7 @@
                 <TableColumn fx:id="B_TableID" prefWidth="115.0" text="Studen ID" />
                 <TableColumn fx:id="B_Name" prefWidth="130.0" text="Name" />
                   <TableColumn fx:id="Amount_" prefWidth="130.0" text="Amount" />
+                  <TableColumn fx:id="Amount_1" prefWidth="130.0" text="Card" />
               </columns>
                <contextMenu>
                   <ContextMenu>

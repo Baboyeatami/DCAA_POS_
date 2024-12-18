@@ -12,13 +12,15 @@ public class Student_dataModel {
 
     private String StudentName;
     private String StudentID;
+    private String NFC_Card_No;
 
     public Student_dataModel() {
     }
 
-    public Student_dataModel(String StudentName, String StudentID) {
+    public Student_dataModel(String StudentName, String StudentID, String NFC_Card_No) {
         this.StudentName = StudentName;
         this.StudentID = StudentID;
+        this.NFC_Card_No = NFC_Card_No;
     }
 
     public String getStudentName() {
@@ -35,6 +37,14 @@ public class Student_dataModel {
 
     public void setStudentID(String StudentID) {
         this.StudentID = StudentID;
+    }
+
+    public String getNFC_Card_No() {
+        return NFC_Card_No;
+    }
+
+    public void setNFC_Card_No(String NFC_Card_No) {
+        this.NFC_Card_No = NFC_Card_No;
     }
 
 }
