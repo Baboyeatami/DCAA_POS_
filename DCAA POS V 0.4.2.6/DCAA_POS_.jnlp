@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="DCAA_POS_.jar" size="161750" download="eager" />
+    <jar href="DCAA_POS_.jar" size="162302" download="eager" />
     <jar href="lib\commons-beanutils-1.8.2.jar" size="231891" download="eager" />
     <jar href="lib\commons-digester-1.7.jar" size="139966" download="eager" />
     <jar href="lib\commons-digester-2.1.jar" size="196768" download="eager" />
